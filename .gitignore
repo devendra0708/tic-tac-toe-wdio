@@ -1,0 +1,9 @@
+node_modules/
+npm-debug.log*
+dist/
+.wdio-cache/
+.wdio-chromedriver-*
+explore_results.txt
+explore_app.py
+.DS_Store
+*.log
