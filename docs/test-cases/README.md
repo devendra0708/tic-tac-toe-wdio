@@ -2,7 +2,15 @@
 
 Per-area inventories in the same format as the original History catalog.
 
-**Legend:** ✓ automated · ◐ partial · ○ planned / manual
+**Legend**
+
+| Mark | Meaning |
+|------|---------|
+| ✓ | Automated — dedicated `it('[ID]')`, covered inside another test, or asserted cross-spec (see catalog notes like `✓ E2E-005`) |
+| ◐ | Partial — some assertions exist; full expected behavior not locked in |
+| ○ | Planned / manual — not automated yet |
+
+All-cases summary: [`../TEST_CASES_SUMMARY.md`](../TEST_CASES_SUMMARY.md) · Known bugs: [`../BUGS.md`](../BUGS.md)
 
 | Section | File | Spec | ID prefix |
 |---------|------|------|-----------|
@@ -16,5 +24,3 @@ Per-area inventories in the same format as the original History catalog.
 | i18n (language) | [I18N_TEST_CASES.md](I18N_TEST_CASES.md) | `i18n.spec.ts` | `I18N` |
 | Persistence | [PERSISTENCE_TEST_CASES.md](PERSISTENCE_TEST_CASES.md) | *(cross-spec)* | `STOR` |
 | E2E journeys | [E2E_TEST_CASES.md](E2E_TEST_CASES.md) | `e2e.spec.ts` | `E2E` |
-
-All-cases summary (one place): [`../TEST_CASES_SUMMARY.md`](../TEST_CASES_SUMMARY.md)

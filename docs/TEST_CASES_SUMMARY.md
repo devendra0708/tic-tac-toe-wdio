@@ -3,11 +3,16 @@
 **SUT:** `app/index.html` (SPA, `localStorage`-backed)  
 **Stack:** WebdriverIO + TypeScript + Chrome  
 **Run:** `npm install && npm test`  
-**Legend:** ✓ automated · ◐ partial · ○ planned / manual
+**Legend**
+
+| Mark | Meaning |
+|------|---------|
+| ✓ | Automated — dedicated `it('[ID]')`, covered inside another test, or asserted cross-spec |
+| ◐ | Partial — some assertions exist; full expected behavior not locked in |
+| ○ | Planned / manual — not automated yet |
 
 > Detailed per-section catalogs: [`test-cases/`](test-cases/README.md)  
-> Known product bugs/issues: [`BUGS.md`](BUGS.md)  
-> Brief: [`INSTRUCTIONS.md`](INSTRUCTIONS.md)
+> Known product bugs/issues: [`BUGS.md`](BUGS.md)
 
 ---
 
@@ -16,9 +21,12 @@
 | Metric | Count |
 |--------|------:|
 | Total cases | **134** |
-| Automated (✓) | **87** |
+| Catalog automated (✓) | **87** |
+| Dedicated `it('[ID]')` blocks | **55** |
 | Partial (◐) | 3 |
 | Planned / manual (○) | 44 |
+
+Catalog ✓ can exceed dedicated `it()` count when one test covers multiple IDs. The Spec map below lists only dedicated `it('[ID]')` blocks.
 
 | Area | Cases | ✓ | ◐ | ○ | Spec | Catalog |
 |------|------:|--:|--:|--:|------|---------|
@@ -243,19 +251,20 @@ Catalog: [`E2E_TEST_CASES.md`](test-cases/E2E_TEST_CASES.md) · Spec: `e2e.spec.
 
 ---
 
-## Spec map (automated `it()` blocks)
+## Spec map (dedicated `it('[ID]')` blocks)
 
-| Spec | IDs |
-|------|-----|
-| `auth.spec.ts` | AUTH-001 … AUTH-006 |
-| `game.spec.ts` | GAME-001 … GAME-006, GAME-008 … GAME-021, DIFF-001 |
-| `profile.spec.ts` | PROF-001 … PROF-003 |
-| `history.spec.ts` | HIST-001 … HIST-007 |
-| `settings.spec.ts` | SET-001 … SET-003 |
-| `i18n.spec.ts` | I18N-001 … I18N-007 |
-| `e2e.spec.ts` | E2E-001 … E2E-008 |
+| Spec | IDs | Count |
+|------|-----|------:|
+| `auth.spec.ts` | AUTH-001 … AUTH-006 | 6 |
+| `game.spec.ts` | GAME-001 … GAME-006, GAME-008 … GAME-021, DIFF-001 | 21 |
+| `profile.spec.ts` | PROF-001 … PROF-003 | 3 |
+| `history.spec.ts` | HIST-001 … HIST-007 | 7 |
+| `settings.spec.ts` | SET-001 … SET-003 | 3 |
+| `i18n.spec.ts` | I18N-001 … I18N-007 | 7 |
+| `e2e.spec.ts` | E2E-001 … E2E-008 | 8 |
+| **Total** | | **55** |
 
-**55** automated `it()` cases across 7 spec files.
+Catalog ✓ without a row above (e.g. AUTH-007, GAME-007, HIST-008, STOR-*, NAV-*) are covered inside another `it()` or a cross-spec journey — not missing from the suite unless marked ○.
 
 ---
 

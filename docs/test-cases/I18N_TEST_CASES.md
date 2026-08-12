@@ -47,3 +47,11 @@
 | SET-003 | theme + language persist together |
 | HIST-007 / 021 | History Persian / English |
 | E2E-008 | localized play journey |
+
+## Known bugs
+
+| Bug | Note |
+|-----|------|
+| [BUG-002](../BUGS.md#bug-002--incomplete-persian-translations) | Incomplete Persian strings (LANGUAGE label, etc.) |
+| [BUG-003](../BUGS.md#bug-003--profile-created-label-not-translated) | Profile “Created” stays English |
+| [BUG-004](../BUGS.md#bug-004--shell-title--subtitle-never-localize) | Title / subtitle never localize |

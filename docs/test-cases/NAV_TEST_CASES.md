@@ -48,3 +48,9 @@ No `nav.spec.ts` — covered indirectly in `auth`, `profile`, `history`, `i18n`,
 | HIST-* | History tab |
 | I18N-002 | Persian nav labels |
 | E2E-001 | multi-tab journey |
+
+## Known bugs
+
+| Bug | Note |
+|-----|------|
+| [BUG-004](../BUGS.md#bug-004--shell-title--subtitle-never-localize) | Title / subtitle never localize (NAV-006) |

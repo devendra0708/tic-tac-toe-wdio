@@ -54,3 +54,10 @@
 | E2E-002 | logout → login returning player |
 | E2E-006 | delete → cannot login; re-register |
 | NAV-* | shell visibility while logged out |
+
+## Known bugs
+
+| Bug | Note |
+|-----|------|
+| [BUG-006](../BUGS.md#bug-006--no-maximum-length-on-names) | No `maxLength` on names (AUTH-013) |
+| [BUG-007](../BUGS.md#bug-007--case-insensitive-identity-design-caveat) | Case-insensitive identity (AUTH-012) |

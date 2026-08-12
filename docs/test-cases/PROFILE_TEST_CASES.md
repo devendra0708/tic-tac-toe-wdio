@@ -50,3 +50,11 @@
 | GAME-004 | counters after finish |
 | HIST-005 | clear → stats zero |
 | E2E-001 / 003 / 005 / 006 | profile in journeys |
+
+## Known bugs
+
+| Bug | Note |
+|-----|------|
+| [BUG-003](../BUGS.md#bug-003--profile-created-label-not-translated) | “Created” label not translated |
+| [BUG-005](../BUGS.md#bug-005--native-windowconfirm-dialogs) | Native confirm for delete account |
+| [BUG-006](../BUGS.md#bug-006--no-maximum-length-on-names) | No `maxLength` on profile name |
