@@ -36,6 +36,7 @@ app/
 docs/
   INSTRUCTIONS.md
   TEST_CASES_SUMMARY.md  # all cases in one place
+  BUGS.md                # known SUT bugs / issues
   test-cases/            # per-section AUTH/GAME/HIST/… catalogs
 wdio.conf.ts
 test/

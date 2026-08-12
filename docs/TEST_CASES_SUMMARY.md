@@ -6,6 +6,7 @@
 **Legend:** ✓ automated · ◐ partial · ○ planned / manual
 
 > Detailed per-section catalogs: [`test-cases/`](test-cases/README.md)  
+> Known product bugs/issues: [`BUGS.md`](BUGS.md)  
 > Brief: [`INSTRUCTIONS.md`](INSTRUCTIONS.md)
 
 ---
@@ -155,7 +156,7 @@ Catalog: [`HISTORY_TEST_CASES.md`](test-cases/HISTORY_TEST_CASES.md) · Spec: `h
 | ✓ | HIST-004 | Multiple games; newest first |
 | ✓ | HIST-005 | Clear History — accept |
 | ✓ | HIST-006 | Clear History — dismiss |
-| ✓ | HIST-007 | FA language on History |
+| ✓ | HIST-007 | Persian language on History |
 | ✓ | HIST-008 | Result labels Win / Loss / Draw |
 | ✓ | HIST-009 | Difficulty column reflects game |
 | ✓ | HIST-010 | Date column non-empty |
@@ -169,7 +170,7 @@ Catalog: [`HISTORY_TEST_CASES.md`](test-cases/HISTORY_TEST_CASES.md) · Spec: `h
 | ○ | HIST-018 | Clear confirm message copy |
 | ○ | HIST-019 | Cap at 100 history entries |
 | ✓ | HIST-020 | Empty state after delete+re-register |
-| ○ | HIST-021 | EN labels after switching back from FA |
+| ○ | HIST-021 | English labels after switching back from Persian |
 | ○ | HIST-022 | Dark theme History still readable |
 
 ### Settings (theme)
@@ -194,16 +195,16 @@ Catalog: [`I18N_TEST_CASES.md`](test-cases/I18N_TEST_CASES.md) · Spec: `i18n.sp
 | Auto | ID | Title |
 |:----:|----|-------|
 | ✓ | I18N-001 | Defaults to English (LTR) |
-| ✓ | I18N-002 | FA → RTL + translated nav |
-| ✓ | I18N-003 | FA translates auth |
-| ✓ | I18N-004 | FA translates game status/controls |
+| ✓ | I18N-002 | Persian → RTL + translated nav |
+| ✓ | I18N-003 | Persian translates auth |
+| ✓ | I18N-004 | Persian translates game status/controls |
 | ✓ | I18N-005 | Switch back to English (LTR) |
 | ✓ | I18N-006 | Language persists after reload |
 | ✓ | I18N-007 | Change language on auth before register |
-| ✓ | I18N-008 | FA History labels |
-| ○ | I18N-009 | EN History after switching back from FA |
-| ○ | I18N-010 | FA Profile labels |
-| ○ | I18N-011 | Theme button label in FA |
+| ✓ | I18N-008 | Persian History labels |
+| ○ | I18N-009 | English History after switching back from Persian |
+| ○ | I18N-010 | Persian Profile labels |
+| ○ | I18N-011 | Theme button label in Persian |
 | ✓ | I18N-012 | Localized full play journey |
 
 ### Persistence
@@ -238,7 +239,7 @@ Catalog: [`E2E_TEST_CASES.md`](test-cases/E2E_TEST_CASES.md) · Spec: `e2e.spec.
 | ✓ | E2E-005 | Dismiss difficulty confirm + dismiss delete |
 | ✓ | E2E-006 | Delete account then re-register same name |
 | ✓ | E2E-007 | Two users have isolated history |
-| ✓ | E2E-008 | Play flow in Persian (RTL) then back to EN |
+| ✓ | E2E-008 | Play flow in Persian (RTL) then back to English |
 
 ---
 

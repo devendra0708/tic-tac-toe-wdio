@@ -23,7 +23,7 @@ Full SPA: Auth → Play → Profile → History → Settings/i18n, with `localSt
 | E2E-005 | Dismiss difficulty confirm + dismiss delete | E2E | Diff, Profile | ✓ |
 | E2E-006 | Delete account then re-register same name | E2E | Auth, Profile, Game | ✓ |
 | E2E-007 | Two users have isolated history | E2E | Auth, History, Persistence | ✓ |
-| E2E-008 | Play flow in Persian (RTL) then back to EN | E2E | i18n, Auth, Game | ✓ |
+| E2E-008 | Play flow in Persian (RTL) then back to English | E2E | i18n, Auth, Game | ✓ |
 
 ---
 
@@ -40,5 +40,5 @@ Full SPA: Auth → Play → Profile → History → Settings/i18n, with `localSt
 | [AUTH](AUTH_TEST_CASES.md) | register / login building blocks |
 | [GAME](GAME_TEST_CASES.md) / [DIFFICULTY](DIFFICULTY_TEST_CASES.md) | board + difficulty |
 | [PROFILE](PROFILE_TEST_CASES.md) / [HISTORY](HISTORY_TEST_CASES.md) | post-game state |
-| [I18N](I18N_TEST_CASES.md) | FA/EN journey detail |
+| [I18N](I18N_TEST_CASES.md) | Persian / English journey detail |
 | [PERSISTENCE](PERSISTENCE_TEST_CASES.md) | isolation / session |

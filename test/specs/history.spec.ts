@@ -137,7 +137,7 @@ describe('History', () => {
     await expect(HistoryPage.clearBtn).toBeDisplayed()
   })
 
-  it('[HIST-007] History labels switch to Persian when language is FA', async () => {
+  it('[HIST-007] History labels switch to Persian when language is Persian', async () => {
     await registerFresh()
     await HeaderPage.setLanguage('fa')
     await HeaderPage.goHistory()
