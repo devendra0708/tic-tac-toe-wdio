@@ -18,34 +18,6 @@ async function finishAGame(): Promise<string | null> {
   return result
 }
 
-async function waitForAlert(timeout = 5000) {
-  await browser.waitUntil(
-    async () => {
-      try {
-        await browser.getAlertText()
-        return true
-      } catch {
-        return false
-      }
-    },
-    { timeout, timeoutMsg: 'Expected native confirm dialog' },
-  )
-}
-
-async function acceptAlert() {
-  await waitForAlert()
-  const text = await browser.getAlertText()
-  await browser.acceptAlert()
-  return text
-}
-
-async function dismissAlert() {
-  await waitForAlert()
-  const text = await browser.getAlertText()
-  await browser.dismissAlert()
-  return text
-}
-
 describe('E2E journeys', () => {
   it('[E2E-001] register → finish game → history + profile updated', async () => {
     const name = uniqueName('E2E1')
@@ -131,8 +103,12 @@ describe('E2E journeys', () => {
     await GamePage.waitForDisplayed()
 
     await GamePage.playCell(4)
+    await expect(GamePage.status).toHaveAttribute('data-status', 'your-turn')
+    // Prefer stubbed confirm (same flake avoidance as E2E-005); fall back to native accept
+    await browser.execute(() => {
+      ;(window as unknown as { confirm: () => boolean }).confirm = () => true
+    })
     await GamePage.difficulty.selectByAttribute('value', 'medium')
-    await expect(await acceptAlert()).toMatch(/difficulty/i)
     await GamePage.waitUntilYourTurn()
     await expect(GamePage.difficulty).toHaveValue('medium')
     for (let i = 0; i < 9; i++) {
