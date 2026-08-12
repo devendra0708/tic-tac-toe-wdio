@@ -17,7 +17,7 @@
 
 ## All possible Difficulty cases
 
-| ID | Title | Type | Expected | Auto |
+| ID | Title | Type | Expected | Automated |
 |----|-------|------|----------|------|
 | DIFF-001 | Change mid-game + Accept | Functional | Confirm → empty board + new difficulty | ✓ |
 | DIFF-002 | Default difficulty Easy | Functional | Select value `easy` for new user | ○ |
@@ -47,3 +47,10 @@
 | GAME-004 | finish on Easy |
 | HIST-003 / 017 | difficulty column |
 | E2E-004 / 005 | accept / dismiss flows |
+
+## Known bugs
+
+| Bug | Note |
+|-----|------|
+| [BUG-001](../BUGS.md#bug-001--difficulty-select-vs-stored-value-after-cancel) | Select may show cancelled difficulty after Dismiss (DIFF-004 / E2E-005) |
+| [BUG-005](../BUGS.md#bug-005--native-windowconfirm-dialogs) | Native confirm for mid-game difficulty change |

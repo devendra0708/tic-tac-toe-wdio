@@ -18,13 +18,13 @@
 
 ## All possible Navigation / shell cases
 
-| ID | Title | Type | Expected | Auto |
+| ID | Title | Type | Expected | Automated |
 |----|-------|------|----------|------|
 | NAV-001 | Nav hidden when logged out | Functional | No nav tabs on auth screen | ✓ (AUTH) |
 | NAV-002 | Nav Play / Profile / History switch views | Functional | Correct `view-*` shown | ◐ (specs) |
 | NAV-003 | Active nav state | Functional | `data-active=true` on current tab | ○ |
 | NAV-004 | Avatar shows first initial | Functional | Name `Sam` → avatar `S` | ○ |
-| NAV-005 | Hello text includes name | Functional | `Hello, {name}` (EN) | ✓ (AUTH-001) |
+| NAV-005 | Hello text includes name | Functional | `Hello, {name}` (English) | ✓ (AUTH-001) |
 | NAV-006 | Title / subtitle on shell | Functional | Tic-Tac-Toe branding visible | ○ |
 | NAV-007 | Theme + language usable on auth | Functional | Controls work before login | ✓ (I18N-007) |
 | NAV-008 | Navigate tabs without losing session | Functional | Stay logged in across Play ↔ Profile ↔ History | ○ |
@@ -46,5 +46,11 @@ No `nav.spec.ts` — covered indirectly in `auth`, `profile`, `history`, `i18n`,
 | AUTH-001 / 006 | hello + logout |
 | PROF-* | Profile tab |
 | HIST-* | History tab |
-| I18N-002 | FA nav labels |
+| I18N-002 | Persian nav labels |
 | E2E-001 | multi-tab journey |
+
+## Known bugs
+
+| Bug | Note |
+|-----|------|
+| [BUG-004](../BUGS.md#bug-004--shell-title--subtitle-never-localize) | Title / subtitle never localize (NAV-006) |

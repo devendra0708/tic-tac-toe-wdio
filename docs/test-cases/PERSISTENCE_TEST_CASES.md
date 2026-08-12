@@ -17,7 +17,7 @@
 
 ## All possible Persistence cases
 
-| ID | Title | Type | Expected | Auto |
+| ID | Title | Type | Expected | Automated |
 |----|-------|------|----------|------|
 | STOR-001 | Users key after register | Persistence | `ttt:users` exists | ○ |
 | STOR-002 | Session key after login/register | Persistence | `ttt:session` set | ○ |

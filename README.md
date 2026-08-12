@@ -1,6 +1,9 @@
 # Tic-Tac-Toe — WebdriverIO + TypeScript
 
-Automated tests for the single-file SUT (`app/index.html`).
+WebdriverIO + TypeScript E2E suite for a single-file Tic-Tac-Toe app.
+
+**SUT:** [`app/index.html`](app/index.html)  
+**URLs:** tests use `http://127.0.0.1:4567` (WDIO static server); manual explore with `npm run serve` → `http://127.0.0.1:8080`
 
 ## Prerequisites
 
@@ -16,7 +19,7 @@ npm install
 ## Run tests
 
 ```bash
-npm test                 # all specs (auth, game, profile, settings, i18n, e2e)
+npm test                 # all specs (auth, game, profile, history, settings, i18n, e2e)
 npm run test:auth
 npm run test:game
 npm run test:profile
@@ -26,7 +29,11 @@ npm run test:i18n
 npm run test:e2e
 ```
 
-The WDIO static-server service serves `app/` at `http://127.0.0.1:4567`.
+## Docs
+
+- [Test cases summary](docs/TEST_CASES_SUMMARY.md) — all cases + coverage counts
+- [Section catalogs](docs/test-cases/README.md) — AUTH / GAME / HIST / …
+- [Known bugs](docs/BUGS.md) — SUT issues from exploration
 
 ## Layout
 
@@ -34,18 +41,12 @@ The WDIO static-server service serves `app/` at `http://127.0.0.1:4567`.
 app/
   index.html           # SUT
 docs/
-  INSTRUCTIONS.md
-  TEST_CASES_SUMMARY.md  # all cases in one place
-  test-cases/            # per-section AUTH/GAME/HIST/… catalogs
+  TEST_CASES_SUMMARY.md
+  BUGS.md
+  test-cases/          # per-section catalogs
 wdio.conf.ts
 test/
   pageobjects/         # Auth, Game, Profile, History, Header
-  specs/               # auth, game, profile, settings, i18n, e2e
+  specs/               # auth, game, profile, history, settings, i18n, e2e
   utils/storage.ts     # fresh localStorage helpers
 ```
-
-## Notes
-
-- Locators use `data-testid` attributes from the SUT.
-- Computer moves are async; game helpers wait on `data-status` rather than fixed sleeps alone.
-- Easy difficulty is used when asserting a finished game (Hard AI is near-optimal / brittle to force-win).

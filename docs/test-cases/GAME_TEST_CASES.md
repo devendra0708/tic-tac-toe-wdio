@@ -19,7 +19,7 @@
 
 ## All possible Gameplay cases
 
-| ID | Title | Type | Expected | Auto |
+| ID | Title | Type | Expected | Automated |
 |----|-------|------|----------|------|
 | GAME-001 | Place X; computer replies O; occupied locked | Functional | Cell `x` disabled; one `o` if game continues | ✓ |
 | GAME-002 | New Game and Reset clear board | Functional | All empty; `your-turn` | ✓ |
