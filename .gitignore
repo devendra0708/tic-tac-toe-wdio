@@ -3,6 +3,8 @@ npm-debug.log*
 dist/
 .wdio-cache/
 .wdio-chromedriver-*
+allure-results/
+allure-report/
 explore_results.txt
 explore_app.py
 .DS_Store

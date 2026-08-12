@@ -1,9 +1,11 @@
+import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = __dirname
 const staticPort = Number(process.env.WDIO_STATIC_PORT || 4567)
+const allureResultsDir = path.join(root, 'allure-results')
 
 export const config: WebdriverIO.Config = {
   runner: 'local',
@@ -47,9 +49,35 @@ export const config: WebdriverIO.Config = {
   ],
 
   framework: 'mocha',
-  reporters: ['spec'],
+  reporters: [
+    'spec',
+    [
+      'allure',
+      {
+        outputDir: allureResultsDir,
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: false,
+        disableMochaHooks: true,
+        reportedEnvironmentVars: {
+          NODE_VERSION: process.version,
+          BROWSER: 'chrome',
+          BASE_URL: `http://127.0.0.1:${staticPort}`,
+        },
+      },
+    ],
+  ],
   mochaOpts: {
     ui: 'bdd',
     timeout: 120000,
+  },
+
+  onPrepare() {
+    fs.rmSync(allureResultsDir, { recursive: true, force: true })
+  },
+
+  afterTest: async function (_test, _context, { error }) {
+    if (error) {
+      await browser.takeScreenshot()
+    }
   },
 }

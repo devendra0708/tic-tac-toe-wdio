@@ -9,6 +9,7 @@ WebdriverIO + TypeScript E2E suite for a single-file Tic-Tac-Toe app.
 
 - Node.js 18+
 - Chrome
+- Java 8+ (for Allure report generation)
 
 ## Setup
 
@@ -27,6 +28,17 @@ npm run test:history
 npm run test:settings
 npm run test:i18n
 npm run test:e2e
+```
+
+## Reports (Allure)
+
+Tests write raw results to `allure-results/` (cleared at the start of each run). Failed tests attach a screenshot.
+
+```bash
+npm run report           # generate HTML + open
+npm run report:generate  # generate only → allure-report/
+npm run report:open      # open existing allure-report/
+npm run report:serve     # generate temp report and serve
 ```
 
 ## Docs
