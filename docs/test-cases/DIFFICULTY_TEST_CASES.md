@@ -17,7 +17,7 @@
 
 ## All possible Difficulty cases
 
-| ID | Title | Type | Expected | Auto |
+| ID | Title | Type | Expected | Automated |
 |----|-------|------|----------|------|
 | DIFF-001 | Change mid-game + Accept | Functional | Confirm → empty board + new difficulty | ✓ |
 | DIFF-002 | Default difficulty Easy | Functional | Select value `easy` for new user | ○ |

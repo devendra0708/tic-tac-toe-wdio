@@ -23,7 +23,7 @@
 ## All possible History cases
 
 
-| ID       | Title                                  | Type        | Expected                                                | Auto        |
+| ID       | Title                                  | Type        | Expected                                                | Automated |
 | -------- | -------------------------------------- | ----------- | ------------------------------------------------------- | ----------- |
 | HIST-001 | Empty state for new user               | Functional  | Empty copy; no table; no Clear; History tab active      | ✓           |
 | HIST-002 | Unfinished game not listed             | Functional  | After mid-game move, history still empty                | ✓           |

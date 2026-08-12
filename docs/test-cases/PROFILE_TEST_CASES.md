@@ -19,7 +19,7 @@
 
 ## All possible Profile cases
 
-| ID | Title | Type | Expected | Auto |
+| ID | Title | Type | Expected | Automated |
 |----|-------|------|----------|------|
 | PROF-001 | Stats + rename success | Functional | W/L/D = 0; created visible; hello updates | ✓ |
 | PROF-002 | Reject whitespace-only name | Negative | `profile-error` (enter a name / at least 2) | ✓ |

@@ -17,7 +17,7 @@
 
 ## All possible i18n cases
 
-| ID | Title | Type | Expected | Auto |
+| ID | Title | Type | Expected | Automated |
 |----|-------|------|----------|------|
 | I18N-001 | Defaults to English (LTR) | Functional | `lang=en` `dir=ltr`; Create Account | ✓ |
 | I18N-002 | Persian → RTL + translated nav | Functional | `lang=fa` / RTL; بازی / پروفایل / تاریخچه / خروج | ✓ |

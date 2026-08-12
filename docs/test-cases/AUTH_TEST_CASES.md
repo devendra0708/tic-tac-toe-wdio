@@ -19,7 +19,7 @@
 
 ## All possible Auth cases
 
-| ID | Title | Type | Expected | Auto |
+| ID | Title | Type | Expected | Automated |
 |----|-------|------|----------|------|
 | AUTH-001 | Register happy path | Functional | Play view; hello shows name; nav visible | ✓ |
 | AUTH-002 | Empty name on register | Negative | `Please enter a name.` | ✓ |

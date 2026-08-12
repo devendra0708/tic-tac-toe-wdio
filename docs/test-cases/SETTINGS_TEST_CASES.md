@@ -17,7 +17,7 @@
 
 ## All possible Settings (theme) cases
 
-| ID | Title | Type | Expected | Auto |
+| ID | Title | Type | Expected | Automated |
 |----|-------|------|----------|------|
 | SET-001 | Toggle light ↔ dark | Functional | `data-theme` + button label flip both ways | ✓ |
 | SET-002 | Theme persists after reload | Persistence | Dark survives refresh | ✓ |

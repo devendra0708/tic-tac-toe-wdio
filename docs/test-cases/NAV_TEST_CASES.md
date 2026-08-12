@@ -18,7 +18,7 @@
 
 ## All possible Navigation / shell cases
 
-| ID | Title | Type | Expected | Auto |
+| ID | Title | Type | Expected | Automated |
 |----|-------|------|----------|------|
 | NAV-001 | Nav hidden when logged out | Functional | No nav tabs on auth screen | ✓ (AUTH) |
 | NAV-002 | Nav Play / Profile / History switch views | Functional | Correct `view-*` shown | ◐ (specs) |

@@ -14,7 +14,7 @@ Full SPA: Auth → Play → Profile → History → Settings/i18n, with `localSt
 
 ## All possible E2E cases
 
-| ID | Title | Type | Covers | Auto |
+| ID | Title | Type | Covers | Automated |
 |----|-------|------|--------|------|
 | E2E-001 | Register → finish → history + profile updated | E2E | Auth, Game, History, Profile | ✓ |
 | E2E-002 | Logout → login → same account plays again | E2E | Auth, Game | ✓ |
