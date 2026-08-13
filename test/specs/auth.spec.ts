@@ -155,4 +155,18 @@ describe('Auth', () => {
     expect(usersKey).toBeTruthy();
     expect(sessionKey).toBeTruthy();
   });
+
+  it('[AUTH-012] login is case-insensitive for the same account', async () => {
+    const name = `Alice${Date.now()}`;
+    await AuthPage.register(name);
+    await GamePage.waitForDisplayed();
+    await expect(HeaderPage.hello).toHaveText(`Hello, ${name}`);
+
+    await HeaderPage.logout();
+    await AuthPage.switchMode();
+    await AuthPage.login(name.toLowerCase());
+    await GamePage.waitForDisplayed();
+    // Display name keeps original casing; lookup is case-insensitive (BUG-007).
+    await expect(HeaderPage.hello).toHaveText(`Hello, ${name}`);
+  });
 });

@@ -1,6 +1,7 @@
 import AuthPage from '../pageobjects/auth-page';
 import GamePage from '../pageobjects/game-page';
 import HeaderPage from '../pageobjects/header-page';
+import HistoryPage from '../pageobjects/history-page';
 import ProfilePage from '../pageobjects/profile-page';
 import { openFreshApp, uniqueName } from '../utils/storage';
 
@@ -127,5 +128,33 @@ describe('i18n', () => {
     await HeaderPage.toggleTheme();
     await expect(await HeaderPage.theme()).toBe('dark');
     await expect(HeaderPage.themeBtn).toHaveText('روشن');
+  });
+
+  it('[I18N-009][HIST-021] English History title returns after switching from Persian', async () => {
+    await AuthPage.register(uniqueName('I18n9'));
+    await GamePage.waitForDisplayed();
+
+    await HeaderPage.setLanguage('fa');
+    await HeaderPage.goHistory();
+    await HistoryPage.waitForDisplayed();
+    await expect(HistoryPage.title).toHaveText('تاریخچهٔ بازی‌ها');
+
+    await HeaderPage.setLanguage('en');
+    await expect(await HeaderPage.dir()).toBe('ltr');
+    await HeaderPage.goHistory();
+    await HistoryPage.waitForDisplayed();
+    await expect(HistoryPage.title).toHaveText('Game History');
+  });
+
+  it('[I18N-010] Persian Profile labels translate', async () => {
+    await AuthPage.register(uniqueName('I18n10'));
+    await GamePage.waitForDisplayed();
+    await HeaderPage.setLanguage('fa');
+    await HeaderPage.goProfile();
+    await ProfilePage.waitForDisplayed();
+
+    await expect(ProfilePage.title).toHaveText('پروفایل شما');
+    await expect(ProfilePage.saveBtn).toHaveText('ذخیرهٔ تغییرات');
+    await expect(ProfilePage.deleteBtn).toHaveText('حذف حساب');
   });
 });
