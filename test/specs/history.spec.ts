@@ -127,10 +127,7 @@ describe('History', () => {
     const before = await HistoryPage.rowCount()
     expect(before).toBeGreaterThanOrEqual(1)
 
-    await browser.execute(() => {
-      ;(window as unknown as { confirm: () => boolean }).confirm = () => false
-    })
-    await HistoryPage.clearBtn.click()
+    await HistoryPage.clear(false)
 
     await expect(await HistoryPage.rowCount()).toBe(before)
     await expect(HistoryPage.empty).not.toBeDisplayed()

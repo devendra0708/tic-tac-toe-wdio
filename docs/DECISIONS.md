@@ -38,11 +38,11 @@ Short rationale for choices in this WebdriverIO suite. Newest items reflect curr
 
 ## DEC-4 — Native `window.confirm` handling
 
-**Decision:** Prefer stubbing `window.confirm` when dismiss/accept races are flaky in Chrome; otherwise use WDIO alert APIs behind `BasePage` helpers. Assert exact English confirm copy where automation owns that case (e.g. DIFF-001 / DIFF-004).
+**Decision:** Always stub `window.confirm` (via `BasePage.stubConfirm`) before Clear History, Delete Account, and mid-game difficulty changes. Assert exact English confirm copy from `__lastConfirm` where the case owns that copy (DIFF-001 / DIFF-004). Keep WDIO alert helpers on `BasePage` only as a fallback — do not use them in CI paths.
 
 **Why:**
-- Native alerts are synchronous; `acceptAlert` / `dismissAlert` can race and hang.
-- Stubbing makes Cancel/OK deterministic for mid-game difficulty, clear history, and delete account flows.
+- Headless Chrome on GitHub Actions races `getAlertText` / `acceptAlert` (`no such alert`), which failed HIST-005, PROF-003, DIFF-001, and related E2E cases.
+- Stubbing makes OK/Cancel deterministic and still lets us assert the confirm message.
 
 ---
 

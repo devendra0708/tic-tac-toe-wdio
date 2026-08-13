@@ -171,6 +171,19 @@ class GamePage extends BasePage {
     await this.difficulty.selectByAttribute('value', 'easy')
   }
 
+  /**
+   * Change difficulty with a stubbed confirm (native alerts race in headless Chrome).
+   * @returns confirm message when a confirm fired; otherwise null
+   */
+  async changeDifficulty(
+    value: 'easy' | 'medium' | 'hard',
+    acceptConfirm = true,
+  ): Promise<string | null> {
+    await this.stubConfirm(acceptConfirm)
+    await this.difficulty.selectByAttribute('value', value)
+    return this.lastStubbedConfirm()
+  }
+
   async difficultyOptionLabels(): Promise<
     Array<{ value: string; text: string }>
   > {

@@ -104,11 +104,7 @@ describe('E2E journeys', () => {
 
     await GamePage.playCell(4)
     await expect(GamePage.status).toHaveAttribute('data-status', 'your-turn')
-    // Prefer stubbed confirm (same flake avoidance as E2E-005); fall back to native accept
-    await browser.execute(() => {
-      ;(window as unknown as { confirm: () => boolean }).confirm = () => true
-    })
-    await GamePage.difficulty.selectByAttribute('value', 'medium')
+    await GamePage.changeDifficulty('medium', true)
     await GamePage.waitUntilYourTurn()
     await expect(GamePage.difficulty).toHaveValue('medium')
     for (let i = 0; i < 9; i++) {
@@ -128,16 +124,12 @@ describe('E2E journeys', () => {
     await GamePage.waitForDisplayed()
 
     await GamePage.playCell(4)
-    // Stub confirm → Cancel (avoids flaky native dismiss in headless Chrome)
-    await browser.execute(() => {
-      ;(window as unknown as { confirm: () => boolean }).confirm = () => false
-    })
-    await GamePage.difficulty.selectByAttribute('value', 'hard')
+    await GamePage.changeDifficulty('hard', false)
     await expect(GamePage.difficulty).toHaveValue('easy')
     await expect(GamePage.cell(4)).toHaveAttribute('data-state', 'x')
 
     await HeaderPage.goProfile()
-    await ProfilePage.deleteBtn.click()
+    await ProfilePage.deleteAccount(false)
     await ProfilePage.waitForDisplayed()
     await expect(HeaderPage.hello).toHaveText(new RegExp(name))
   })

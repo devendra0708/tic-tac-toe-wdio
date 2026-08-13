@@ -48,7 +48,10 @@ export default class BasePage {
     await browser.dismissAlert()
   }
 
-  /** Replace `window.confirm` and record the last message as `__lastConfirm`. */
+  /**
+   * Replace `window.confirm` and record the last message as `__lastConfirm`.
+   * Prefer this over WDIO alert APIs — native alerts race in headless Chrome.
+   */
   protected async stubConfirm(accept: boolean) {
     await browser.execute((shouldAccept) => {
       ;(

@@ -48,14 +48,15 @@ class HistoryPage extends BasePage {
     return this.row(index).getAttribute('data-result')
   }
 
-  async clear(accept = true) {
+  /**
+   * Clear history via stubbed confirm (native alerts race in headless Chrome).
+   * @returns confirm message captured by the stub
+   */
+  async clear(accept = true): Promise<string | null> {
+    await this.stubConfirm(accept)
     await this.clearBtn.waitForClickable()
     await this.clearBtn.click()
-    if (accept) {
-      await this.acceptNativeConfirm('Expected clear-history confirm')
-    } else {
-      await this.dismissNativeConfirm('Expected clear-history confirm')
-    }
+    return this.lastStubbedConfirm()
   }
 }
 
