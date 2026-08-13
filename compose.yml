@@ -1,0 +1,13 @@
+services:
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.tests
+    environment:
+      CI: 'true'
+      CHROME_BIN: /usr/bin/chromium
+      CHROMEDRIVER_BIN: /usr/bin/chromedriver
+    # Surface the in-container Allure report on the host. allure-results stays
+    # inside the (--rm) container so runs never merge stale results.
+    volumes:
+      - ./allure-report:/app/allure-report

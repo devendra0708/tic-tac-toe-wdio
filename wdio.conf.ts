@@ -1,21 +1,38 @@
-import fs from 'node:fs'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const root = __dirname
-const staticPort = Number(process.env.WDIO_STATIC_PORT || 4567)
-const allureResultsDir = path.join(root, 'allure-results')
-const isCI = process.env.CI === 'true' || process.env.CI === '1'
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const root = __dirname;
+const staticPort = Number(process.env.WDIO_STATIC_PORT || 4567);
+const allureResultsDir = path.join(root, 'allure-results');
+const isCI = process.env.CI === 'true' || process.env.CI === '1';
 
 const chromeArgs = [
   '--disable-gpu',
   '--window-size=1280,900',
   '--no-sandbox',
   '--disable-dev-shm-usage',
-]
+];
 if (isCI) {
-  chromeArgs.unshift('--headless=new')
+  chromeArgs.unshift('--headless=new');
+}
+
+const chromeOptions: WebdriverIO.Capabilities['goog:chromeOptions'] = {
+  args: chromeArgs,
+};
+if (process.env.CHROME_BIN) {
+  chromeOptions.binary = process.env.CHROME_BIN;
+}
+
+const capability: WebdriverIO.Capabilities = {
+  browserName: 'chrome',
+  'goog:chromeOptions': chromeOptions,
+};
+if (process.env.CHROMEDRIVER_BIN) {
+  capability['wdio:chromedriverOptions'] = {
+    binary: process.env.CHROMEDRIVER_BIN,
+  };
 }
 
 export const config: WebdriverIO.Config = {
@@ -26,14 +43,7 @@ export const config: WebdriverIO.Config = {
   exclude: [],
 
   maxInstances: 1,
-  capabilities: [
-    {
-      browserName: 'chrome',
-      'goog:chromeOptions': {
-        args: chromeArgs,
-      },
-    },
-  ],
+  capabilities: [capability],
 
   cacheDir: path.join(root, '.wdio-cache'),
 
@@ -81,12 +91,12 @@ export const config: WebdriverIO.Config = {
   },
 
   onPrepare() {
-    fs.rmSync(allureResultsDir, { recursive: true, force: true })
+    fs.rmSync(allureResultsDir, { recursive: true, force: true });
   },
 
   afterTest: async function (_test, _context, { error }) {
     if (error) {
-      await browser.takeScreenshot()
+      await browser.takeScreenshot();
     }
   },
-}
+};
