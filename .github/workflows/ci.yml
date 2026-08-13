@@ -53,6 +53,7 @@ jobs:
         run: npm test
         env:
           CI: true
+          WDIO_MAX_INSTANCES: '2'
 
       - name: Generate Allure HTML report
         if: ${{ !cancelled() }}

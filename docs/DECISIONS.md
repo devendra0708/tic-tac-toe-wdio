@@ -117,9 +117,9 @@ Short rationale for choices in this WebdriverIO suite. Newest items reflect curr
 
 ## DEC-13 — Parallel workers
 
-**Decision:** Default `maxInstances` to `min(4, cpus-1)`; override with `WDIO_MAX_INSTANCES`. The static-server is a WDIO **launcher** (one port for all workers); browser sessions isolate `localStorage`.
+**Decision:** Default `maxInstances` to `min(4, cpus-1)` locally and **2 in CI**; override with `WDIO_MAX_INSTANCES`. The static-server is a WDIO **launcher** (one port for all workers); browser sessions isolate `localStorage`.
 
-**Why:** Cuts wall-clock on multi-core machines/CI without serving the SUT multiple times. Use `WDIO_MAX_INSTANCES=1` when debugging flakes.
+**Why:** Cuts wall-clock without serving the SUT multiple times. CI caps at 2 because packing ~8 Chromes on a GitHub runner shortens the `computer-thinking` window and flakes timing assertions (GAME-008). Use `WDIO_MAX_INSTANCES=1` when debugging flakes.
 
 ---
 
