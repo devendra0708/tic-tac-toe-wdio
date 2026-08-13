@@ -42,7 +42,7 @@ These are product issues (not automation failures).
 
 ### Actual
 - Board and stored user `difficulty` stay on the previous value (e.g. `easy`) — good.
-- The `<select data-testid="select-language">` / difficulty control may still display the **cancelled** option (`hard`) after dismiss (observed in exploration).
+- The `<select data-testid="select-difficulty">` may still display the **cancelled** option (`hard`) after dismiss (observed in exploration).
 
 ### Impact
 Player can believe Hard is active while the engine / `ttt:users[].difficulty` is still Easy (or the reverse after further actions). Misleading UI.

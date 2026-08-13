@@ -25,8 +25,8 @@
 | Metric | Count |
 |--------|------:|
 | Total cases | **136** |
-| Catalog automated (✓) | **101** |
-| Dedicated `it('[ID]')` blocks | **~80+** (see Spec map) |
+| Catalog automated (✓) | **123** |
+| Dedicated `it('[ID]')` blocks | **85** |
 | Partial (◐) | 2 |
 | Planned / manual (○) | 11 |
 | Priority P0 | **60** |
@@ -35,15 +35,15 @@ Catalog ✓ can exceed dedicated `it()` count when one test covers multiple IDs.
 
 | Area | Cases | ✓ | ◐ | ○ | Spec | Catalog |
 |------|------:|--:|--:|--:|------|---------|
-| Auth | 17 | 14 | 0 | 3 | `auth.spec.ts` | [AUTH](test-cases/AUTH_TEST_CASES.md) |
-| Navigation / shell | 10 | 10 | 0 | 0 | `nav.spec.ts *(+ cross-spec)*` | [NAV](test-cases/NAV_TEST_CASES.md) |
+| Auth | 17 | 15 | 0 | 2 | `auth.spec.ts` | [AUTH](test-cases/AUTH_TEST_CASES.md) |
+| Navigation / shell | 10 | 10 | 0 | 0 | `nav.spec.ts` | [NAV](test-cases/NAV_TEST_CASES.md) |
 | Gameplay | 23 | 23 | 0 | 0 | `game.spec.ts` | [GAME](test-cases/GAME_TEST_CASES.md) |
-| Difficulty | 9 | 8 | 0 | 1 | `game.spec.ts / e2e` | [DIFF](test-cases/DIFFICULTY_TEST_CASES.md) |
-| Profile | 13 | 9 | 1 | 3 | `profile.spec.ts` | [PROF](test-cases/PROFILE_TEST_CASES.md) |
-| History | 22 | 16 | 1 | 5 | `history.spec.ts` | [HIST](test-cases/HISTORY_TEST_CASES.md) |
+| Difficulty | 9 | 8 | 0 | 1 | `game.spec.ts` / `e2e` | [DIFF](test-cases/DIFFICULTY_TEST_CASES.md) |
+| Profile | 13 | 10 | 1 | 2 | `profile.spec.ts` | [PROF](test-cases/PROFILE_TEST_CASES.md) |
+| History | 22 | 19 | 1 | 2 | `history.spec.ts` | [HIST](test-cases/HISTORY_TEST_CASES.md) |
 | Settings (theme) | 8 | 5 | 0 | 3 | `settings.spec.ts` | [SET](test-cases/SETTINGS_TEST_CASES.md) |
-| i18n (language) | 14 | 12 | 0 | 2 | `i18n.spec.ts` | [I18N](test-cases/I18N_TEST_CASES.md) |
-| Persistence | 12 | 11 | 0 | 1 | `*(cross-spec)*` | [STOR](test-cases/PERSISTENCE_TEST_CASES.md) |
+| i18n (language) | 14 | 14 | 0 | 0 | `i18n.spec.ts` | [I18N](test-cases/I18N_TEST_CASES.md) |
+| Persistence | 12 | 11 | 0 | 1 | *(cross-spec)* | [STOR](test-cases/PERSISTENCE_TEST_CASES.md) |
 | E2E journeys | 8 | 8 | 0 | 0 | `e2e.spec.ts` | [E2E](test-cases/E2E_TEST_CASES.md) |
 
 ---
@@ -89,7 +89,7 @@ Catalog: [`NAV_TEST_CASES.md`](test-cases/NAV_TEST_CASES.md) · Spec: `nav.spec.
 | NAV-007 | Theme + language usable on auth | P1 | ✓ |
 | NAV-008 | Navigate tabs without losing session | P0 | ✓ |
 | NAV-009 | Logout returns to auth | P0 | ✓ |
-| NAV-010 | Play → History → Play keeps board context | P1 | ✓ |
+| NAV-010 | Play → History → Play keeps session | P1 | ✓ |
 
 ### Gameplay
 
@@ -260,16 +260,17 @@ Catalog: [`E2E_TEST_CASES.md`](test-cases/E2E_TEST_CASES.md) · Spec: `e2e.spec.
 
 ## Spec map (dedicated `it('[ID]')` blocks)
 
-| Spec | IDs (representative) |
-|------|----------------------|
-| `auth.spec.ts` | AUTH-001…006, 008, 010–011, 015–016; STOR-001/002 |
-| `nav.spec.ts` | NAV-003, 004, 006, 008, 010 |
-| `game.spec.ts` | GAME-001…021; DIFF-001…004, 006, 008 |
-| `profile.spec.ts` | PROF-001…003, 007–008 |
-| `history.spec.ts` | HIST-001…007, 014–015, 018 |
-| `settings.spec.ts` | SET-001…003, 005 |
-| `i18n.spec.ts` | I18N-001…007, 011, 013–014 |
-| `e2e.spec.ts` | E2E-001…008 |
+| Spec | Count | IDs |
+|------|------:|-----|
+| `auth.spec.ts` | 13 | AUTH-001…006, 008, 010–012, 015–016; STOR-001/002 |
+| `nav.spec.ts` | 5 | NAV-003, 004, 006, 008, 010 |
+| `game.spec.ts` | 26 | GAME-001…006, 008…021; DIFF-001…004, 006, 008 |
+| `profile.spec.ts` | 6 | PROF-001…003, 006…008 |
+| `history.spec.ts` | 11 | HIST-001…007, 014–015, 017–018 (+ STOR-011) |
+| `settings.spec.ts` | 4 | SET-001…003, 005 |
+| `i18n.spec.ts` | 12 | I18N-001…007, 009…011, 013–014 (+ HIST-021) |
+| `e2e.spec.ts` | 8 | E2E-001…008 |
+| **Total** | **85** | |
 
 Catalog ✓ without a dedicated row above are covered inside another `it()` or a cross-spec journey.
 
