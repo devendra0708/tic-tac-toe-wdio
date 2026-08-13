@@ -118,4 +118,14 @@ describe('i18n', () => {
     expect(byValue.medium).toBe('متوسط');
     expect(byValue.hard).toBe('سخت');
   });
+
+  it('[I18N-011] theme button label switches in Persian', async () => {
+    await AuthPage.waitForDisplayed();
+    await HeaderPage.setLanguage('fa');
+    await expect(await HeaderPage.theme()).toBe('light');
+    await expect(HeaderPage.themeBtn).toHaveText('تیره');
+    await HeaderPage.toggleTheme();
+    await expect(await HeaderPage.theme()).toBe('dark');
+    await expect(HeaderPage.themeBtn).toHaveText('روشن');
+  });
 });

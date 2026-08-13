@@ -3,15 +3,8 @@ import GamePage from '../pageobjects/game-page';
 import HeaderPage from '../pageobjects/header-page';
 import HistoryPage from '../pageobjects/history-page';
 import ProfilePage from '../pageobjects/profile-page';
+import { registerAndPlay } from '../utils/fixtures';
 import { openFreshApp, uniqueName } from '../utils/storage';
-
-async function registerAndPlay() {
-  const name = uniqueName('Gamer');
-  await openFreshApp();
-  await AuthPage.register(name);
-  await GamePage.waitForDisplayed();
-  return name;
-}
 
 describe('Game', () => {
   it('[GAME-001] places X, computer replies with O, occupied cell stays locked', async () => {
@@ -302,5 +295,12 @@ describe('Game', () => {
     await AuthPage.login(name);
     await GamePage.waitForDisplayed();
     await expect(GamePage.difficulty).toHaveValue('hard');
+  });
+
+  it('[DIFF-008] difficulty select exposes Easy / Medium / Hard', async () => {
+    await registerAndPlay('DiffOpts');
+    const options = await GamePage.difficultyOptionLabels();
+    expect(options.map((o) => o.value)).toEqual(['easy', 'medium', 'hard']);
+    expect(options.map((o) => o.text)).toEqual(['Easy', 'Medium', 'Hard']);
   });
 });

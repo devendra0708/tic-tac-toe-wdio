@@ -10,6 +10,9 @@
 | ✓ | Automated — dedicated `it('[ID]')`, covered inside another test, or asserted cross-spec |
 | ◐ | Partial — some assertions exist; full expected behavior not locked in |
 | ○ | Planned / manual — not automated yet |
+| **P0** | Critical path — must stay green for a credible take-home |
+| **P1** | Important coverage — automate when cheap / stabilizes product claims |
+| **Backlog** | Edge / subjective / expensive — defer unless time allows |
 
 > Detailed per-section catalogs: [`test-cases/`](test-cases/README.md)  
 > Known product bugs/issues: [`BUGS.md`](BUGS.md)  
@@ -22,24 +25,25 @@
 | Metric | Count |
 |--------|------:|
 | Total cases | **136** |
-| Catalog automated (✓) | **96** |
-| Dedicated `it('[ID]')` blocks | **65** |
-| Partial (◐) | 3 |
-| Planned / manual (○) | 37 |
+| Catalog automated (✓) | **116** |
+| Dedicated `it('[ID]')` blocks | **~80+** (see Spec map) |
+| Partial (◐) | 2 |
+| Planned / manual (○) | 18 |
+| Priority P0 | **60** |
 
-Catalog ✓ can exceed dedicated `it()` count when one test covers multiple IDs. The Spec map below lists only dedicated `it('[ID]')` blocks.
+Catalog ✓ can exceed dedicated `it()` count when one test covers multiple IDs. The Spec map below lists dedicated `it('[ID]')` blocks.
 
 | Area | Cases | ✓ | ◐ | ○ | Spec | Catalog |
 |------|------:|--:|--:|--:|------|---------|
-| Auth | 17 | 11 | 0 | 6 | `auth.spec.ts` | [AUTH](test-cases/AUTH_TEST_CASES.md) |
-| Navigation / shell | 10 | 4 | 1 | 5 | *(cross-spec)* | [NAV](test-cases/NAV_TEST_CASES.md) |
+| Auth | 17 | 14 | 0 | 3 | `auth.spec.ts` | [AUTH](test-cases/AUTH_TEST_CASES.md) |
+| Navigation / shell | 10 | 10 | 0 | 0 | `nav.spec.ts *(+ cross-spec)*` | [NAV](test-cases/NAV_TEST_CASES.md) |
 | Gameplay | 23 | 23 | 0 | 0 | `game.spec.ts` | [GAME](test-cases/GAME_TEST_CASES.md) |
-| Difficulty | 9 | 7 | 0 | 2 | `game.spec.ts` / `e2e` | [DIFF](test-cases/DIFFICULTY_TEST_CASES.md) |
-| Profile | 13 | 8 | 1 | 4 | `profile.spec.ts` | [PROF](test-cases/PROFILE_TEST_CASES.md) |
-| History | 22 | 14 | 1 | 7 | `history.spec.ts` | [HIST](test-cases/HISTORY_TEST_CASES.md) |
-| Settings (theme) | 8 | 4 | 0 | 4 | `settings.spec.ts` | [SET](test-cases/SETTINGS_TEST_CASES.md) |
-| i18n (language) | 14 | 11 | 0 | 3 | `i18n.spec.ts` | [I18N](test-cases/I18N_TEST_CASES.md) |
-| Persistence | 12 | 8 | 0 | 4 | *(cross-spec)* | [STOR](test-cases/PERSISTENCE_TEST_CASES.md) |
+| Difficulty | 9 | 8 | 0 | 1 | `game.spec.ts / e2e` | [DIFF](test-cases/DIFFICULTY_TEST_CASES.md) |
+| Profile | 13 | 9 | 1 | 3 | `profile.spec.ts` | [PROF](test-cases/PROFILE_TEST_CASES.md) |
+| History | 22 | 16 | 1 | 5 | `history.spec.ts` | [HIST](test-cases/HISTORY_TEST_CASES.md) |
+| Settings (theme) | 8 | 5 | 0 | 3 | `settings.spec.ts` | [SET](test-cases/SETTINGS_TEST_CASES.md) |
+| i18n (language) | 14 | 12 | 0 | 2 | `i18n.spec.ts` | [I18N](test-cases/I18N_TEST_CASES.md) |
+| Persistence | 12 | 11 | 0 | 1 | `*(cross-spec)*` | [STOR](test-cases/PERSISTENCE_TEST_CASES.md) |
 | E2E journeys | 8 | 8 | 0 | 0 | `e2e.spec.ts` | [E2E](test-cases/E2E_TEST_CASES.md) |
 
 ---
@@ -50,224 +54,224 @@ Catalog ✓ can exceed dedicated `it()` count when one test covers multiple IDs.
 
 Catalog: [`AUTH_TEST_CASES.md`](test-cases/AUTH_TEST_CASES.md) · Spec: `auth.spec.ts`
 
-| ID | Title | Automated |
-|----|-------|:----------:|
-| AUTH-001 | Register happy path | ✓ |
-| AUTH-002 | Empty name on register | ✓ |
-| AUTH-003 | Name too short | ✓ |
-| AUTH-004 | Duplicate register | ✓ |
-| AUTH-005 | Login mode + unknown + success | ✓ |
-| AUTH-006 | Session on reload; logout clears | ✓ |
-| AUTH-007 | Switch register → login | ✓ |
-| AUTH-008 | Switch login → register | ○ |
-| AUTH-009 | Auth form on first visit | ✓ |
-| AUTH-010 | Whitespace-only register | ✓ |
-| AUTH-011 | Leading/trailing spaces trimmed | ✓ |
-| AUTH-012 | Case / key normalization | ○ |
-| AUTH-013 | Very long name | ○ |
-| AUTH-014 | Special characters in name | ○ |
-| AUTH-015 | Error clears when switching mode | ○ |
-| AUTH-016 | Empty login | ○ |
-| AUTH-017 | Nav hidden when logged out | ✓ |
+| ID | Title | Priority | Automated |
+|----|-------|:--------:|:----------:|
+| AUTH-001 | Register happy path | P0 | ✓ |
+| AUTH-002 | Empty name on register | P0 | ✓ |
+| AUTH-003 | Name too short | P0 | ✓ |
+| AUTH-004 | Duplicate register | P0 | ✓ |
+| AUTH-005 | Login mode + unknown + success | P0 | ✓ |
+| AUTH-006 | Session on reload; logout clears | P0 | ✓ |
+| AUTH-007 | Switch register → login | P1 | ✓ |
+| AUTH-008 | Switch login → register | P1 | ✓ |
+| AUTH-009 | Auth form on first visit | P0 | ✓ |
+| AUTH-010 | Whitespace-only register | P1 | ✓ |
+| AUTH-011 | Leading/trailing spaces trimmed | P1 | ✓ |
+| AUTH-012 | Case / key normalization | Backlog | ○ |
+| AUTH-013 | Very long name | Backlog | ○ |
+| AUTH-014 | Special characters in name | Backlog | ○ |
+| AUTH-015 | Error clears when switching mode | P1 | ✓ |
+| AUTH-016 | Empty login | P1 | ✓ |
+| AUTH-017 | Nav hidden when logged out | P0 | ✓ |
 
 ### Navigation / shell
 
-Catalog: [`NAV_TEST_CASES.md`](test-cases/NAV_TEST_CASES.md) · Spec: *(cross-spec)*
+Catalog: [`NAV_TEST_CASES.md`](test-cases/NAV_TEST_CASES.md) · Spec: `nav.spec.ts *(+ cross-spec)*`
 
-| ID | Title | Automated |
-|----|-------|:----------:|
-| NAV-001 | Nav hidden when logged out | ✓ |
-| NAV-002 | Nav Play / Profile / History switch views | ◐ |
-| NAV-003 | Active nav state | ○ |
-| NAV-004 | Avatar shows first initial | ○ |
-| NAV-005 | Hello text includes name | ✓ |
-| NAV-006 | Title / subtitle on shell | ○ |
-| NAV-007 | Theme + language usable on auth | ✓ |
-| NAV-008 | Navigate tabs without losing session | ○ |
-| NAV-009 | Logout returns to auth | ✓ |
-| NAV-010 | Play → History → Play keeps board context | ○ |
+| ID | Title | Priority | Automated |
+|----|-------|:--------:|:----------:|
+| NAV-001 | Nav hidden when logged out | P0 | ✓ |
+| NAV-002 | Nav Play / Profile / History switch views | P0 | ✓ |
+| NAV-003 | Active nav state | P1 | ✓ |
+| NAV-004 | Avatar shows first initial | P1 | ✓ |
+| NAV-005 | Hello text includes name | P0 | ✓ |
+| NAV-006 | Title / subtitle on shell | P1 | ✓ |
+| NAV-007 | Theme + language usable on auth | P1 | ✓ |
+| NAV-008 | Navigate tabs without losing session | P0 | ✓ |
+| NAV-009 | Logout returns to auth | P0 | ✓ |
+| NAV-010 | Play → History → Play keeps board context | P1 | ✓ |
 
 ### Gameplay
 
 Catalog: [`GAME_TEST_CASES.md`](test-cases/GAME_TEST_CASES.md) · Spec: `game.spec.ts`
 
-| ID | Title | Automated |
-|----|-------|:----------:|
-| GAME-001 | Place X; computer replies O; occupied locked | ✓ |
-| GAME-002 | New Game and Reset clear board | ✓ |
-| GAME-003 | Hint highlights empty cell | ✓ |
-| GAME-004 | Finish updates status, history, profile | ✓ |
-| GAME-005 | Initial board empty | ✓ |
-| GAME-006 | Computer thinking status | ✓ |
-| GAME-007 | Occupied cell not clickable | ✓ |
-| GAME-008 | Cells disabled while busy | ✓ |
-| GAME-009 | Cells disabled after game over | ✓ |
-| GAME-010 | Human win status | ✓ |
-| GAME-011 | Winning cells highlighted | ✓ |
-| GAME-012 | Computer win status | ✓ |
-| GAME-013 | Draw status | ✓ |
-| GAME-014 | Win via row / column / diagonal | ✓ |
-| GAME-015 | New Game after finished | ✓ |
-| GAME-016 | Hint mid-game | ✓ |
-| GAME-017 | Hint disabled when not your turn | ✓ |
-| GAME-018 | Hint fades after timeout | ✓ |
-| GAME-019 | Double-click same empty cell | ✓ |
-| GAME-020 | Status copy matches status attr | ✓ |
-| GAME-021 | Board has 9 cells only | ✓ |
-| GAME-022 | Human always X / computer O | ✓ |
-| GAME-023 | Unfinished game not in history | ✓ |
+| ID | Title | Priority | Automated |
+|----|-------|:--------:|:----------:|
+| GAME-001 | Place X; computer replies O; occupied locked | P0 | ✓ |
+| GAME-002 | New Game and Reset clear board | P0 | ✓ |
+| GAME-003 | Hint highlights empty cell | P0 | ✓ |
+| GAME-004 | Finish updates status, history, profile | P0 | ✓ |
+| GAME-005 | Initial board empty | P0 | ✓ |
+| GAME-006 | Computer thinking status | P1 | ✓ |
+| GAME-007 | Occupied cell not clickable | P1 | ✓ |
+| GAME-008 | Cells disabled while busy | P1 | ✓ |
+| GAME-009 | Cells disabled after game over | P1 | ✓ |
+| GAME-010 | Human win status | P0 | ✓ |
+| GAME-011 | Winning cells highlighted | P1 | ✓ |
+| GAME-012 | Computer win status | P0 | ✓ |
+| GAME-013 | Draw status | P0 | ✓ |
+| GAME-014 | Win via row / column / diagonal | P1 | ✓ |
+| GAME-015 | New Game after finished | P1 | ✓ |
+| GAME-016 | Hint mid-game | P1 | ✓ |
+| GAME-017 | Hint disabled when not your turn | P1 | ✓ |
+| GAME-018 | Hint fades after timeout | P1 | ✓ |
+| GAME-019 | Double-click same empty cell | P1 | ✓ |
+| GAME-020 | Status copy matches status attr | P1 | ✓ |
+| GAME-021 | Board has 9 cells only | P1 | ✓ |
+| GAME-022 | Human always X / computer O | P1 | ✓ |
+| GAME-023 | Unfinished game not in history | P1 | ✓ |
 
 ### Difficulty
 
-Catalog: [`DIFFICULTY_TEST_CASES.md`](test-cases/DIFFICULTY_TEST_CASES.md) · Spec: `game.spec.ts` / `e2e`
+Catalog: [`DIFFICULTY_TEST_CASES.md`](test-cases/DIFFICULTY_TEST_CASES.md) · Spec: `game.spec.ts / e2e`
 
-| ID | Title | Automated |
-|----|-------|:----------:|
-| DIFF-001 | Change mid-game + Accept | ✓ |
-| DIFF-002 | Default difficulty Easy | ✓ |
-| DIFF-003 | Change Easy→Medium on idle board | ✓ |
-| DIFF-004 | Change mid-game + Dismiss | ✓ |
-| DIFF-005 | Hard AI stronger than Easy | ○ |
-| DIFF-006 | Difficulty saved on user | ✓ |
-| DIFF-007 | Difficulty shown in history row | ✓ |
-| DIFF-008 | Options Easy/Medium/Hard present | ○ |
-| DIFF-009 | Accept then finish records new difficulty | ✓ |
+| ID | Title | Priority | Automated |
+|----|-------|:--------:|:----------:|
+| DIFF-001 | Change mid-game + Accept | P0 | ✓ |
+| DIFF-002 | Default difficulty Easy | P0 | ✓ |
+| DIFF-003 | Change Easy→Medium on idle board | P1 | ✓ |
+| DIFF-004 | Change mid-game + Dismiss | P0 | ✓ |
+| DIFF-005 | Hard AI stronger than Easy | Backlog | ○ |
+| DIFF-006 | Difficulty saved on user | P1 | ✓ |
+| DIFF-007 | Difficulty shown in history row | P1 | ✓ |
+| DIFF-008 | Options Easy/Medium/Hard present | P1 | ✓ |
+| DIFF-009 | Accept then finish records new difficulty | P1 | ✓ |
 
 ### Profile
 
 Catalog: [`PROFILE_TEST_CASES.md`](test-cases/PROFILE_TEST_CASES.md) · Spec: `profile.spec.ts`
 
-| ID | Title | Automated |
-|----|-------|:----------:|
-| PROF-001 | Stats + rename success | ✓ |
-| PROF-002 | Reject whitespace-only name | ✓ |
-| PROF-003 | Delete account accept | ✓ |
-| PROF-004 | Created date displayed | ✓ |
-| PROF-005 | Initial stats zero | ✓ |
-| PROF-006 | Rename too short (native) | ○ |
-| PROF-007 | Rename to existing user | ✓ |
-| PROF-008 | Rename updates avatar | ○ |
-| PROF-009 | Stats after win | ◐ |
-| PROF-010 | Stats after loss | ○ |
-| PROF-011 | Stats after draw | ○ |
-| PROF-012 | Delete account dismiss | ✓ |
-| PROF-013 | Clear history zeros profile stats | ✓ |
+| ID | Title | Priority | Automated |
+|----|-------|:--------:|:----------:|
+| PROF-001 | Stats + rename success | P0 | ✓ |
+| PROF-002 | Reject whitespace-only name | P1 | ✓ |
+| PROF-003 | Delete account accept | P0 | ✓ |
+| PROF-004 | Created date displayed | P1 | ✓ |
+| PROF-005 | Initial stats zero | P0 | ✓ |
+| PROF-006 | Rename too short (native) | Backlog | ○ |
+| PROF-007 | Rename to existing user | P1 | ✓ |
+| PROF-008 | Rename updates avatar | P1 | ✓ |
+| PROF-009 | Stats after win | P1 | ◐ |
+| PROF-010 | Stats after loss | Backlog | ○ |
+| PROF-011 | Stats after draw | Backlog | ○ |
+| PROF-012 | Delete account dismiss | P0 | ✓ |
+| PROF-013 | Clear history zeros profile stats | P0 | ✓ |
 
 ### History
 
 Catalog: [`HISTORY_TEST_CASES.md`](test-cases/HISTORY_TEST_CASES.md) · Spec: `history.spec.ts`
 
-| ID | Title | Automated |
-|----|-------|:----------:|
-| HIST-001 | Empty state for new user | ✓ |
-| HIST-002 | Unfinished game not listed | ✓ |
-| HIST-003 | Finished game creates a row | ✓ |
-| HIST-004 | Multiple games; newest first | ✓ |
-| HIST-005 | Clear History — accept | ✓ |
-| HIST-006 | Clear History — dismiss | ✓ |
-| HIST-007 | Persian language on History (empty copy) | ✓ |
-| HIST-008 | Result labels Win / Loss / Draw | ✓ |
-| HIST-009 | Difficulty column reflects game | ✓ |
-| HIST-010 | Date column non-empty | ✓ |
-| HIST-011 | Row border color by result | ◐ |
-| HIST-012 | Only one row per finished game | ✓ |
-| HIST-013 | Navigate Play → History → Play | ○ |
-| HIST-014 | History survives reload (same session) | ✓ |
-| HIST-015 | History survives logout/login | ○ |
-| HIST-016 | Two users isolated | ✓ |
-| HIST-017 | Hard/Medium difficulty recorded | ○ |
-| HIST-018 | Clear confirm message copy | ○ |
-| HIST-019 | Cap at 100 history entries | ○ |
-| HIST-020 | Empty state after delete+re-register | ✓ |
-| HIST-021 | English labels after switching back from Persian | ○ |
-| HIST-022 | Dark theme History still readable | ○ |
+| ID | Title | Priority | Automated |
+|----|-------|:--------:|:----------:|
+| HIST-001 | Empty state for new user | P0 | ✓ |
+| HIST-002 | Unfinished game not listed | P0 | ✓ |
+| HIST-003 | Finished game creates a row | P0 | ✓ |
+| HIST-004 | Multiple games; newest first | P0 | ✓ |
+| HIST-005 | Clear History — accept | P0 | ✓ |
+| HIST-006 | Clear History — dismiss | P0 | ✓ |
+| HIST-007 | Persian language on History (empty copy) | P1 | ✓ |
+| HIST-008 | Result labels Win / Loss / Draw | P1 | ✓ |
+| HIST-009 | Difficulty column reflects game | P1 | ✓ |
+| HIST-010 | Date column non-empty | P1 | ✓ |
+| HIST-011 | Row border color by result | Backlog | ◐ |
+| HIST-012 | Only one row per finished game | P1 | ✓ |
+| HIST-013 | Navigate Play → History → Play | P1 | ✓ |
+| HIST-014 | History survives reload (same session) | P0 | ✓ |
+| HIST-015 | History survives logout/login | P0 | ✓ |
+| HIST-016 | Two users isolated | P0 | ✓ |
+| HIST-017 | Hard/Medium difficulty recorded | Backlog | ○ |
+| HIST-018 | Clear confirm message copy | P1 | ✓ |
+| HIST-019 | Cap at 100 history entries | Backlog | ○ |
+| HIST-020 | Empty state after delete+re-register | P1 | ✓ |
+| HIST-021 | English labels after switching back from Persian | Backlog | ○ |
+| HIST-022 | Dark theme History still readable | Backlog | ○ |
 
 ### Settings (theme)
 
 Catalog: [`SETTINGS_TEST_CASES.md`](test-cases/SETTINGS_TEST_CASES.md) · Spec: `settings.spec.ts`
 
-| ID | Title | Automated |
-|----|-------|:----------:|
-| SET-001 | Toggle light ↔ dark | ✓ |
-| SET-002 | Theme persists after reload | ✓ |
-| SET-003 | Theme + language persist together | ✓ |
-| SET-004 | Default theme light | ✓ |
-| SET-005 | Theme usable on auth screen | ○ |
-| SET-006 | Dark theme Play still readable | ○ |
-| SET-007 | Dark theme Profile still readable | ○ |
-| SET-008 | Dark theme History still readable | ○ |
+| ID | Title | Priority | Automated |
+|----|-------|:--------:|:----------:|
+| SET-001 | Toggle light ↔ dark | P0 | ✓ |
+| SET-002 | Theme persists after reload | P0 | ✓ |
+| SET-003 | Theme + language persist together | P1 | ✓ |
+| SET-004 | Default theme light | P0 | ✓ |
+| SET-005 | Theme usable on auth screen | P1 | ✓ |
+| SET-006 | Dark theme Play still readable | Backlog | ○ |
+| SET-007 | Dark theme Profile still readable | Backlog | ○ |
+| SET-008 | Dark theme History still readable | Backlog | ○ |
 
 ### i18n (language)
 
 Catalog: [`I18N_TEST_CASES.md`](test-cases/I18N_TEST_CASES.md) · Spec: `i18n.spec.ts`
 
-| ID | Title | Automated |
-|----|-------|:----------:|
-| I18N-001 | Defaults to English (LTR) | ✓ |
-| I18N-002 | Persian → RTL + translated nav | ✓ |
-| I18N-003 | Persian translates auth | ✓ |
-| I18N-004 | Persian translates game status/controls | ✓ |
-| I18N-005 | Switch back to English (LTR) | ✓ |
-| I18N-006 | Language persists after reload | ✓ |
-| I18N-007 | Change language on auth before register | ✓ |
-| I18N-008 | Persian History labels | ✓ |
-| I18N-009 | English History after switching back from Persian | ○ |
-| I18N-010 | Persian Profile labels | ○ |
-| I18N-011 | Theme button label in Persian | ○ |
-| I18N-012 | Localized full play journey | ✓ |
-| I18N-013 | Persian Profile created date format | ✓ |
-| I18N-014 | Difficulty options in Persian | ✓ |
+| ID | Title | Priority | Automated |
+|----|-------|:--------:|:----------:|
+| I18N-001 | Defaults to English (LTR) | P0 | ✓ |
+| I18N-002 | Persian → RTL + translated nav | P0 | ✓ |
+| I18N-003 | Persian translates auth | P1 | ✓ |
+| I18N-004 | Persian translates game status/controls | P1 | ✓ |
+| I18N-005 | Switch back to English (LTR) | P0 | ✓ |
+| I18N-006 | Language persists after reload | P0 | ✓ |
+| I18N-007 | Change language on auth before register | P1 | ✓ |
+| I18N-008 | Persian History labels | P1 | ✓ |
+| I18N-009 | English History after switching back from Persian | Backlog | ○ |
+| I18N-010 | Persian Profile labels | Backlog | ○ |
+| I18N-011 | Theme button label in Persian | P1 | ✓ |
+| I18N-012 | Localized full play journey | P0 | ✓ |
+| I18N-013 | Persian Profile created date format | P1 | ✓ |
+| I18N-014 | Difficulty options in Persian | P1 | ✓ |
 
 ### Persistence
 
-Catalog: [`PERSISTENCE_TEST_CASES.md`](test-cases/PERSISTENCE_TEST_CASES.md) · Spec: *(cross-spec)*
+Catalog: [`PERSISTENCE_TEST_CASES.md`](test-cases/PERSISTENCE_TEST_CASES.md) · Spec: `*(cross-spec)*`
 
-| ID | Title | Automated |
-|----|-------|:----------:|
-| STOR-001 | Users key after register | ○ |
-| STOR-002 | Session key after login/register | ○ |
-| STOR-003 | Logout removes session | ✓ |
-| STOR-004 | Delete removes user record | ✓ |
-| STOR-005 | Corrupt users JSON recovery | ○ |
-| STOR-006 | Theme key persisted | ✓ |
-| STOR-007 | Lang key persisted | ✓ |
-| STOR-008 | Two users isolated | ✓ |
-| STOR-009 | Session survives reload | ✓ |
-| STOR-010 | History survives reload (same session) | ✓ |
-| STOR-011 | History survives logout/login | ○ |
-| STOR-012 | Difficulty saved on user | ✓ |
+| ID | Title | Priority | Automated |
+|----|-------|:--------:|:----------:|
+| STOR-001 | Users key after register | P1 | ✓ |
+| STOR-002 | Session key after login/register | P1 | ✓ |
+| STOR-003 | Logout removes session | P0 | ✓ |
+| STOR-004 | Delete removes user record | P0 | ✓ |
+| STOR-005 | Corrupt users JSON recovery | Backlog | ○ |
+| STOR-006 | Theme key persisted | P1 | ✓ |
+| STOR-007 | Lang key persisted | P1 | ✓ |
+| STOR-008 | Two users isolated | P0 | ✓ |
+| STOR-009 | Session survives reload | P0 | ✓ |
+| STOR-010 | History survives reload (same session) | P0 | ✓ |
+| STOR-011 | History survives logout/login | P0 | ✓ |
+| STOR-012 | Difficulty saved on user | P1 | ✓ |
 
 ### E2E journeys
 
 Catalog: [`E2E_TEST_CASES.md`](test-cases/E2E_TEST_CASES.md) · Spec: `e2e.spec.ts`
 
-| ID | Title | Automated |
-|----|-------|:----------:|
-| E2E-001 | Register → finish → history + profile updated | ✓ |
-| E2E-002 | Logout → login → same account plays again | ✓ |
-| E2E-003 | Rename then play; history under new name | ✓ |
-| E2E-004 | Accept difficulty change mid-game then finish | ✓ |
-| E2E-005 | Dismiss difficulty confirm + dismiss delete | ✓ |
-| E2E-006 | Delete account then re-register same name | ✓ |
-| E2E-007 | Two users have isolated history | ✓ |
-| E2E-008 | Play flow in Persian (RTL) then back to English | ✓ |
+| ID | Title | Priority | Automated |
+|----|-------|:--------:|:----------:|
+| E2E-001 | Register → finish → history + profile updated | P0 | ✓ |
+| E2E-002 | Logout → login → same account plays again | P0 | ✓ |
+| E2E-003 | Rename then play; history under new name | P0 | ✓ |
+| E2E-004 | Accept difficulty change mid-game then finish | P0 | ✓ |
+| E2E-005 | Dismiss difficulty confirm + dismiss delete | P0 | ✓ |
+| E2E-006 | Delete account then re-register same name | P0 | ✓ |
+| E2E-007 | Two users have isolated history | P0 | ✓ |
+| E2E-008 | Play flow in Persian (RTL) then back to English | P0 | ✓ |
 
 ---
 
 ## Spec map (dedicated `it('[ID]')` blocks)
 
-| Spec | IDs | Count |
-|------|-----|------:|
-| `auth.spec.ts` | AUTH-001 … AUTH-006, AUTH-010, AUTH-011 | 8 |
-| `game.spec.ts` | GAME-001 … GAME-006, GAME-008 … GAME-021, DIFF-001 … DIFF-004, DIFF-006 | 25 |
-| `profile.spec.ts` | PROF-001 … PROF-003, PROF-007 | 4 |
-| `history.spec.ts` | HIST-001 … HIST-007, HIST-014 | 8 |
-| `settings.spec.ts` | SET-001 … SET-003 | 3 |
-| `i18n.spec.ts` | I18N-001 … I18N-007, I18N-013, I18N-014 | 9 |
-| `e2e.spec.ts` | E2E-001 … E2E-008 | 8 |
-| **Total** | | **65** |
+| Spec | IDs (representative) |
+|------|----------------------|
+| `auth.spec.ts` | AUTH-001…006, 008, 010–011, 015–016; STOR-001/002 |
+| `nav.spec.ts` | NAV-003, 004, 006, 008, 010 |
+| `game.spec.ts` | GAME-001…021; DIFF-001…004, 006, 008 |
+| `profile.spec.ts` | PROF-001…003, 007–008 |
+| `history.spec.ts` | HIST-001…007, 014–015, 018 |
+| `settings.spec.ts` | SET-001…003, 005 |
+| `i18n.spec.ts` | I18N-001…007, 011, 013–014 |
+| `e2e.spec.ts` | E2E-001…008 |
 
-Catalog ✓ without a row above (e.g. AUTH-007, GAME-007, HIST-008, STOR-*, NAV-*) are covered inside another `it()` or a cross-spec journey — not missing from the suite unless marked ○.
+Catalog ✓ without a dedicated row above are covered inside another `it()` or a cross-spec journey.
 
 ---
 
@@ -276,10 +280,15 @@ Catalog ✓ without a row above (e.g. AUTH-007, GAME-007, HIST-008, STOR-*, NAV-
 ```bash
 npm test                 # all specs
 npm run test:auth
+npm run test:nav
 npm run test:game
 npm run test:profile
 npm run test:history
 npm run test:settings
 npm run test:i18n
 npm run test:e2e
+
+npm run report           # generate Allure HTML + open (needs Java)
+npm run report:generate  # generate only → allure-report/
+npm run report:open      # open existing allure-report/
 ```

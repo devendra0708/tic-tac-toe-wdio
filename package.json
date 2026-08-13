@@ -13,6 +13,7 @@
     "test:settings": "wdio run wdio.conf.ts --spec test/specs/settings.spec.ts",
     "test:i18n": "wdio run wdio.conf.ts --spec test/specs/i18n.spec.ts",
     "test:e2e": "wdio run wdio.conf.ts --spec test/specs/e2e.spec.ts",
+    "test:nav": "wdio run wdio.conf.ts --spec test/specs/nav.spec.ts",
     "serve": "npx http-server app -p 8080 -c-1",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",

@@ -34,12 +34,12 @@
 | HIST-010 | Date column non-empty | Functional | Localized date/time string | ✓ (in 003) |
 | HIST-011 | Row border color by result | UI | `data-result` win/loss/draw drives CSS | ◐ attr only |
 | HIST-012 | Only one row per finished game | Edge | Single finish → exactly 1 row | ✓ (in 003) |
-| HIST-013 | Navigate Play → History → Play | Functional | Views switch; data persists | ○ |
+| HIST-013 | Navigate Play → History → Play | Functional | Views switch; data persists | ✓ |
 | HIST-014 | History survives reload (same session) | Persistence | Rows still present after refresh | ✓ |
-| HIST-015 | History survives logout/login | Persistence | Same user sees prior rows | ○ |
+| HIST-015 | History survives logout/login | Persistence | Same user sees prior rows | ✓ |
 | HIST-016 | Two users isolated | Persistence | Covered by `[E2E-007]` | ✓ E2E |
 | HIST-017 | Hard/Medium difficulty recorded | Functional | Difficulty cell shows Hard/Medium | ○ |
-| HIST-018 | Clear confirm message copy | Functional | Confirm mentions history/games | ○ |
+| HIST-018 | Clear confirm message copy | Functional | Confirm mentions history/games | ✓ |
 | HIST-019 | Cap at 100 history entries | Edge | 101st drops oldest | ○ manual |
 | HIST-020 | Empty state after delete+re-register | Functional | Covered by `[E2E-006]` | ✓ E2E |
 | HIST-021 | English labels after switching back from Persian | Functional | Title “Game History” again | ○ |

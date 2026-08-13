@@ -79,4 +79,16 @@ describe('Profile', () => {
     await expect(await ProfilePage.error.getText()).toMatch(/already uses this name/i);
     await expect(HeaderPage.hello).toHaveText(new RegExp(second));
   });
+
+  it('[PROF-008] rename updates avatar initial', async () => {
+    await openFreshApp();
+    await AuthPage.register(uniqueName('Ann'));
+    await GamePage.waitForDisplayed();
+    await expect(HeaderPage.avatar).toHaveText('A');
+
+    await HeaderPage.goProfile();
+    await ProfilePage.waitForDisplayed();
+    await ProfilePage.saveName(uniqueName('Bob'));
+    await expect(HeaderPage.avatar).toHaveText('B');
+  });
 });
