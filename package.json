@@ -14,6 +14,7 @@
     "test:i18n": "wdio run wdio.conf.ts --spec test/specs/i18n.spec.ts",
     "test:e2e": "wdio run wdio.conf.ts --spec test/specs/e2e.spec.ts",
     "serve": "npx http-server app -p 8080 -c-1",
+    "typecheck": "tsc --noEmit",
     "report": "allure generate allure-results --clean -o allure-report && allure open allure-report",
     "report:generate": "allure generate allure-results --clean -o allure-report",
     "report:open": "allure open allure-report",

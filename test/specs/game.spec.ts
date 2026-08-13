@@ -280,24 +280,8 @@ describe('Game', () => {
     await GamePage.playCell(4)
     await expect(GamePage.status).toHaveAttribute('data-status', 'your-turn')
 
-    await GamePage.difficulty.selectByAttribute('value', 'hard')
-    await browser.waitUntil(
-      async () => {
-        try {
-          const text = await browser.getAlertText()
-          if (text !== 'Change difficulty and start a new game?') return false
-          await browser.acceptAlert()
-          return true
-        } catch {
-          return false
-        }
-      },
-      {
-        timeout: 5000,
-        timeoutMsg:
-          'Expected confirm: “Change difficulty and start a new game?”',
-      },
-    )
+    const confirmText = await GamePage.changeDifficulty('hard', true)
+    expect(confirmText).toBe('Change difficulty and start a new game?')
 
     await GamePage.waitUntilYourTurn()
     await GamePage.expectEmptyBoard()
@@ -311,25 +295,7 @@ describe('Game', () => {
     await GamePage.playCell(4)
     await expect(GamePage.status).toHaveAttribute('data-status', 'your-turn')
 
-    // Stub Cancel + capture copy (native dismissAlert is flaky in Chrome)
-    await browser.execute(() => {
-      ;(
-        window as unknown as { __lastConfirm: string | null; confirm: (m?: string) => boolean }
-      ).__lastConfirm = null
-      ;(window as unknown as { confirm: (m?: string) => boolean }).confirm = (
-        msg?: string,
-      ) => {
-        ;(
-          window as unknown as { __lastConfirm: string | null }
-        ).__lastConfirm = String(msg ?? '')
-        return false
-      }
-    })
-    await GamePage.difficulty.selectByAttribute('value', 'hard')
-    const confirmText = await browser.execute(
-      () =>
-        (window as unknown as { __lastConfirm: string | null }).__lastConfirm,
-    )
+    const confirmText = await GamePage.changeDifficulty('hard', false)
     expect(confirmText).toBe('Change difficulty and start a new game?')
 
     await expect(GamePage.cell(4)).toHaveAttribute('data-state', 'x')

@@ -44,14 +44,15 @@ class ProfilePage extends BasePage {
     await this.saveBtn.click()
   }
 
-  async deleteAccount(accept = true) {
+  /**
+   * Delete account via stubbed confirm (native alerts race in headless Chrome).
+   * @returns confirm message captured by the stub
+   */
+  async deleteAccount(accept = true): Promise<string | null> {
+    await this.stubConfirm(accept)
     await this.deleteBtn.waitForClickable()
     await this.deleteBtn.click()
-    if (accept) {
-      await this.acceptNativeConfirm('Expected delete confirm dialog')
-    } else {
-      await this.dismissNativeConfirm('Expected delete confirm dialog')
-    }
+    return this.lastStubbedConfirm()
   }
 }
 
