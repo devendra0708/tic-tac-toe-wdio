@@ -22,6 +22,16 @@ class HeaderPage extends BasePage {
   get logoutBtn() {
     return this.tid('btn-logout');
   }
+  get title() {
+    return this.tid('title');
+  }
+  get subtitle() {
+    return this.tid('subtitle');
+  }
+  /** Avatar initial circle (class-based; no data-testid in SUT). */
+  get avatar() {
+    return $('.avatar');
+  }
 
   async theme(): Promise<string | null> {
     return $('html').getAttribute('data-theme');

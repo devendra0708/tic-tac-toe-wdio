@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { cpus } from 'node:os';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -35,6 +36,12 @@ if (process.env.CHROMEDRIVER_BIN) {
   };
 }
 
+// Specs share one launcher static-server; sessions isolate localStorage.
+// Local: up to 4 workers. CI: cap at 2 — GitHub runners get CPU-bound with 8
+// Chrome sessions, which shrinks the computer-thinking window and flakes GAME-008.
+const defaultInstances = isCI ? 2 : Math.min(4, Math.max(1, cpus().length - 1));
+const maxInstances = Number(process.env.WDIO_MAX_INSTANCES ?? defaultInstances);
+
 export const config: WebdriverIO.Config = {
   runner: 'local',
   tsConfigPath: './tsconfig.json',
@@ -42,7 +49,7 @@ export const config: WebdriverIO.Config = {
   specs: ['./test/specs/**/*.ts'],
   exclude: [],
 
-  maxInstances: 1,
+  maxInstances,
   capabilities: [capability],
 
   cacheDir: path.join(root, '.wdio-cache'),
@@ -81,6 +88,7 @@ export const config: WebdriverIO.Config = {
           BROWSER: 'chrome',
           BASE_URL: `http://127.0.0.1:${staticPort}`,
           CI: String(isCI),
+          MAX_INSTANCES: String(maxInstances),
         },
       },
     ],

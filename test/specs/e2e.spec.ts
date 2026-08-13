@@ -3,20 +3,8 @@ import GamePage from '../pageobjects/game-page';
 import HeaderPage from '../pageobjects/header-page';
 import HistoryPage from '../pageobjects/history-page';
 import ProfilePage from '../pageobjects/profile-page';
+import { finishEasyGame } from '../utils/fixtures';
 import { openFreshApp, uniqueName } from '../utils/storage';
-
-async function finishAGame(): Promise<string | null> {
-  await GamePage.difficulty.selectByAttribute('value', 'easy');
-  let result: string | null = null;
-  for (let attempt = 0; attempt < 6; attempt++) {
-    await GamePage.newGame();
-    result = await GamePage.playUntilOver();
-    if (result === 'human' || result === 'computer' || result === 'draw') {
-      return result;
-    }
-  }
-  return result;
-}
 
 describe('E2E journeys', () => {
   it('[E2E-001] register → finish game → history + profile updated', async () => {
@@ -25,7 +13,7 @@ describe('E2E journeys', () => {
     await AuthPage.register(name);
     await GamePage.waitForDisplayed();
 
-    const result = await finishAGame();
+    const result = await finishEasyGame();
     expect(['human', 'computer', 'draw']).toContain(result);
 
     await HeaderPage.goHistory();
@@ -35,7 +23,6 @@ describe('E2E journeys', () => {
       result === 'human' ? 'Win' : result === 'computer' ? 'Loss' : 'Draw',
     );
 
-    // Stats are derived from history — assert before clearing
     await HeaderPage.goProfile();
     await ProfilePage.waitForDisplayed();
     const total =
@@ -84,7 +71,7 @@ describe('E2E journeys', () => {
 
     await HeaderPage.goPlay();
     await GamePage.waitForDisplayed();
-    const result = await finishAGame();
+    const result = await finishEasyGame();
     expect(['human', 'computer', 'draw']).toContain(result);
 
     await HeaderPage.goHistory();
@@ -111,7 +98,7 @@ describe('E2E journeys', () => {
       await expect(GamePage.cell(i)).toHaveAttribute('data-state', 'empty');
     }
 
-    const result = await finishAGame();
+    const result = await finishEasyGame();
     expect(['human', 'computer', 'draw']).toContain(result);
     await HeaderPage.goHistory();
     await expect(await HistoryPage.rowCount()).toBeGreaterThanOrEqual(1);
@@ -139,7 +126,7 @@ describe('E2E journeys', () => {
     await openFreshApp();
     await AuthPage.register(name);
     await GamePage.waitForDisplayed();
-    await finishAGame();
+    await finishEasyGame();
 
     await HeaderPage.goProfile();
     await ProfilePage.deleteAccount(true);
@@ -163,7 +150,7 @@ describe('E2E journeys', () => {
     await openFreshApp();
     await AuthPage.register(userA);
     await GamePage.waitForDisplayed();
-    await finishAGame();
+    await finishEasyGame();
     await HeaderPage.goHistory();
     await expect(await HistoryPage.rowCount()).toBeGreaterThanOrEqual(1);
     await HeaderPage.logout();

@@ -100,4 +100,59 @@ describe('Auth', () => {
     await GamePage.waitForDisplayed();
     await expect(HeaderPage.hello).toHaveText(`Hello, ${core}`);
   });
+
+  it('[AUTH-008] switches from login back to register', async () => {
+    await AuthPage.waitForDisplayed();
+    await expect(AuthPage.form).toHaveAttribute('data-mode', 'register');
+    await AuthPage.switchMode();
+    await expect(AuthPage.form).toHaveAttribute('data-mode', 'login');
+    await AuthPage.switchMode();
+    await expect(AuthPage.form).toHaveAttribute('data-mode', 'register');
+    await expect(AuthPage.registerBtn).toBeDisplayed();
+  });
+
+  it('[AUTH-015] error clears when switching mode', async () => {
+    await AuthPage.waitForDisplayed();
+    await AuthPage.submitEmptyRegister();
+    await expect(AuthPage.error).toBeDisplayed();
+    await AuthPage.switchMode();
+    await expect(AuthPage.form).toHaveAttribute('data-mode', 'login');
+    await expect(AuthPage.error).not.toBeDisplayed();
+  });
+
+  it('[AUTH-016] shows error when login name is empty', async () => {
+    await AuthPage.waitForDisplayed();
+    await AuthPage.switchMode();
+    await expect(AuthPage.form).toHaveAttribute('data-mode', 'login');
+    await AuthPage.submitEmptyLogin();
+    await expect(AuthPage.error).toBeDisplayed();
+    await expect(AuthPage.error).toHaveText('Please enter a name.');
+  });
+
+  it('[STOR-001][STOR-002] persists users and session keys after register', async () => {
+    const name = uniqueName('Stor');
+    await AuthPage.register(name);
+    await GamePage.waitForDisplayed();
+
+    const storage = await browser.execute(() => {
+      const out: Record<string, string | null> = {};
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key) out[key] = localStorage.getItem(key);
+      }
+      return out;
+    });
+    const keys = Object.keys(storage);
+    const usersKey = keys.find(
+      (k) => k.toLowerCase().includes('user') && storage[k]?.includes(name),
+    );
+    const sessionKey = keys.find(
+      (k) =>
+        k.toLowerCase().includes('session') ||
+        storage[k] === name ||
+        storage[k]?.includes(`"${name}"`),
+    );
+    expect(usersKey).toBeTruthy();
+    expect(sessionKey).toBeTruthy();
+  });
 });

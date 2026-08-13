@@ -3,15 +3,8 @@ import GamePage from '../pageobjects/game-page';
 import HeaderPage from '../pageobjects/header-page';
 import HistoryPage from '../pageobjects/history-page';
 import ProfilePage from '../pageobjects/profile-page';
+import { registerAndPlay } from '../utils/fixtures';
 import { openFreshApp, uniqueName } from '../utils/storage';
-
-async function registerAndPlay() {
-  const name = uniqueName('Gamer');
-  await openFreshApp();
-  await AuthPage.register(name);
-  await GamePage.waitForDisplayed();
-  return name;
-}
 
 describe('Game', () => {
   it('[GAME-001] places X, computer replies with O, occupied cell stays locked', async () => {
@@ -96,9 +89,36 @@ describe('Game', () => {
 
   it('[GAME-008] empty cells are disabled while computer is thinking', async () => {
     await registerAndPlay();
-    await GamePage.clickCellRaw(4);
-    await GamePage.waitForStatus('computer-thinking', 3000);
-    await expect(await GamePage.emptyCellsDisabled()).toBe(true);
+    // Thinking is brief on Easy/CI — poll status+disabled in one round-trip and retry.
+    let caught = false;
+    for (let attempt = 0; attempt < 12 && !caught; attempt++) {
+      await GamePage.newGame();
+      await GamePage.clickCellRaw(4);
+      try {
+        await browser.waitUntil(
+          async () => {
+            const snap = await browser.execute(() => {
+              const status = document
+                .querySelector('[data-testid="status"]')
+                ?.getAttribute('data-status');
+              if (status !== 'computer-thinking') {
+                return false;
+              }
+              const empties = [...document.querySelectorAll('[data-testid^="cell-"]')].filter(
+                (el) => el.getAttribute('data-state') === 'empty',
+              );
+              return empties.every((el) => (el as HTMLButtonElement).disabled);
+            });
+            return snap;
+          },
+          { timeout: 2500, interval: 25 },
+        );
+        caught = true;
+      } catch {
+        // Missed the thinking window; try again.
+      }
+    }
+    expect(caught).toBe(true);
   });
 
   it('[GAME-009] all cells are disabled after game over', async () => {
@@ -216,7 +236,7 @@ describe('Game', () => {
     await expect(GamePage.status).toHaveText(GamePage.statusCopyPattern('your-turn') as RegExp);
 
     for (const outcome of ['human', 'computer', 'draw'] as const) {
-      await GamePage.playUntilResult(outcome, outcome === 'draw' ? 50 : 30);
+      await GamePage.playUntilResult(outcome);
       await expect(GamePage.status).toHaveAttribute('data-status', outcome);
       await expect(GamePage.status).toHaveText(GamePage.statusCopyPattern(outcome) as RegExp);
     }
@@ -302,5 +322,12 @@ describe('Game', () => {
     await AuthPage.login(name);
     await GamePage.waitForDisplayed();
     await expect(GamePage.difficulty).toHaveValue('hard');
+  });
+
+  it('[DIFF-008] difficulty select exposes Easy / Medium / Hard', async () => {
+    await registerAndPlay('DiffOpts');
+    const options = await GamePage.difficultyOptionLabels();
+    expect(options.map((o) => o.value)).toEqual(['easy', 'medium', 'hard']);
+    expect(options.map((o) => o.text)).toEqual(['Easy', 'Medium', 'Hard']);
   });
 });

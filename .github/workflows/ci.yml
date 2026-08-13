@@ -9,11 +9,16 @@ concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   e2e:
     name: E2E + Allure
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    outputs:
+      report_ready: ${{ steps.allure_ready.outputs.ready }}
 
     steps:
       - name: Checkout
@@ -48,6 +53,7 @@ jobs:
         run: npm test
         env:
           CI: true
+          WDIO_MAX_INSTANCES: '2'
 
       - name: Generate Allure HTML report
         if: ${{ !cancelled() }}
@@ -71,3 +77,35 @@ jobs:
           path: allure-results/
           if-no-files-found: warn
           retention-days: 14
+
+      - name: Check Allure report exists
+        id: allure_ready
+        if: ${{ !cancelled() }}
+        run: |
+          if [ -f allure-report/index.html ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload Pages artifact
+        if: ${{ !cancelled() && steps.allure_ready.outputs.ready == 'true' }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: allure-report
+
+  publish-report:
+    name: Publish Allure to GitHub Pages
+    needs: e2e
+    if: ${{ !cancelled() && needs.e2e.outputs.report_ready == 'true' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') }}
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4

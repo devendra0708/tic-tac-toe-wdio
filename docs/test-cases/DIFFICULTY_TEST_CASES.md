@@ -26,7 +26,7 @@
 | DIFF-005 | Hard AI stronger than Easy | Edge | Perfect play rarely loses on Hard | ○ manual |
 | DIFF-006 | Difficulty saved on user | Persistence | Set Hard → logout/login → still Hard | ✓ |
 | DIFF-007 | Difficulty shown in history row | Functional | Row difficulty matches game | ✓ HIST-003 |
-| DIFF-008 | Options Easy/Medium/Hard present | Functional | Three options in select | ○ |
+| DIFF-008 | Options Easy/Medium/Hard present | Functional | Three options in select | ✓ |
 | DIFF-009 | Accept then finish records new difficulty | Functional | History shows Hard/Easy after change | ✓ E2E-004 |
 
 ---

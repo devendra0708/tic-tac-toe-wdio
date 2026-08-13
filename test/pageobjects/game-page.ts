@@ -198,8 +198,12 @@ class GamePage extends BasePage {
     return this.statusValue();
   }
 
-  async playUntilResult(wanted: 'human' | 'computer' | 'draw', maxAttempts = 30): Promise<string> {
+  async playUntilResult(
+    wanted: 'human' | 'computer' | 'draw',
+    maxAttempts?: number,
+  ): Promise<string> {
     await this.setEasy();
+    // Human-strong order often wins on Easy; computer needs deliberately weak play.
     const orders =
       wanted === 'draw'
         ? [
@@ -209,15 +213,33 @@ class GamePage extends BasePage {
             [0, 8, 2, 6, 1, 3, 5, 7, 4],
             [1, 3, 5, 7, 0, 2, 6, 8, 4],
           ]
-        : [[0, 2, 1, 3, 6, 4, 5, 7, 8]];
+        : wanted === 'computer'
+          ? [
+              [0, 1, 2, 3, 4, 5, 6, 7, 8],
+              [0, 1, 3, 2, 6, 4, 5, 7, 8],
+              [1, 2, 3, 4, 5, 6, 7, 8, 0],
+              [0, 8, 1, 7, 2, 6, 3, 5, 4],
+              [2, 1, 0, 5, 3, 8, 7, 6, 4],
+              [0, 2, 3, 1, 6, 5, 7, 8, 4],
+              [1, 3, 5, 7, 2, 6, 0, 8, 4],
+              [3, 5, 1, 7, 0, 2, 6, 8, 4],
+            ]
+          : [
+              [0, 2, 1, 3, 6, 4, 5, 7, 8],
+              [0, 4, 8, 2, 6, 1, 3, 5, 7],
+              [2, 4, 6, 0, 8, 1, 3, 5, 7],
+              [0, 1, 2, 3, 6, 4, 5, 7, 8],
+            ];
 
-    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    const attempts = maxAttempts ?? (wanted === 'computer' || wanted === 'draw' ? 60 : 40);
+
+    for (let attempt = 0; attempt < attempts; attempt++) {
       await this.newGame();
       const order = orders[attempt % orders.length];
       const result = await this.playUntilOver(9, order);
       if (result === wanted) return result;
     }
-    throw new Error(`Did not reach status "${wanted}" in ${maxAttempts} games`);
+    throw new Error(`Did not reach status "${wanted}" in ${attempts} games`);
   }
 
   async waitForWinHighlight(timeout = 5000): Promise<number[]> {

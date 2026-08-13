@@ -10,6 +10,8 @@ Per-area inventories in the same format as the original History catalog.
 | ◐ | Partial — some assertions exist; full expected behavior not locked in |
 | ○ | Planned / manual — not automated yet |
 
+Priority (P0 / P1 / Backlog) is tracked on the summary tables in [`../TEST_CASES_SUMMARY.md`](../TEST_CASES_SUMMARY.md).
+
 All-cases summary: [`../TEST_CASES_SUMMARY.md`](../TEST_CASES_SUMMARY.md) · Known bugs: [`../BUGS.md`](../BUGS.md) · Decisions: [`../DECISIONS.md`](../DECISIONS.md)
 
 | Section | File | Spec | ID prefix |

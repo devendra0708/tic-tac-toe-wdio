@@ -13,7 +13,7 @@ WebdriverIO + TypeScript E2E suite for a single-file Tic-Tac-Toe app.
 4. [`docs/DECISIONS.md`](docs/DECISIONS.md) — why the suite is built this way  
 5. [`test/specs/`](test/specs/) — automated specs (`[ID]` in each `it` title)
 
-CI runs on every push/PR: typecheck → lint → format check → E2E suite + Allure HTML uploaded as the **`allure-report`** artifact (also raw **`allure-results`**). Download from the Actions run — no local Java required to *view* a generated report if you serve the artifact folder (e.g. `npx http-server allure-report -o`).
+CI runs on every push/PR: typecheck → lint → format check → E2E suite + Allure HTML as the **`allure-report`** artifact (also **`allure-results`**). On **`main`**, the same report is published to **GitHub Pages** (enable **Settings → Pages → Source: GitHub Actions** once).
 
 ## Prerequisites
 
@@ -30,11 +30,12 @@ npm install
 ## Run tests
 
 ```bash
-npm test                 # all specs (auth, game, profile, history, settings, i18n, e2e)
+npm test                 # all specs (auth, nav, game, profile, history, settings, i18n, e2e)
 npm run typecheck
 npm run lint
 npm run format:check
 npm run test:auth
+npm run test:nav
 npm run test:game
 npm run test:profile
 npm run test:history
@@ -43,7 +44,8 @@ npm run test:i18n
 npm run test:e2e
 ```
 
-Set `CI=true` to force headless Chrome (same as GitHub Actions).
+Set `CI=true` to force headless Chrome (same as GitHub Actions).  
+Override parallelism with `WDIO_MAX_INSTANCES` (default: up to 4 workers).
 
 ### Docker (no host Chrome/Java)
 
@@ -97,6 +99,6 @@ compose.yml
 wdio.conf.ts
 test/
   pageobjects/         # BasePage + Auth, Game, Profile, History, Header
-  specs/               # auth, game, profile, history, settings, i18n, e2e
-  utils/storage.ts     # fresh localStorage helpers
+  specs/               # auth, nav, game, profile, history, settings, i18n, e2e
+  utils/               # storage + shared fixtures
 ```

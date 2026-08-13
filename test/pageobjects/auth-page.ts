@@ -42,6 +42,11 @@ class AuthPage extends BasePage {
     await this.nameInput.clearValue();
     await this.registerBtn.click();
   }
+
+  async submitEmptyLogin() {
+    await this.nameInput.clearValue();
+    await this.loginBtn.click();
+  }
 }
 
 export default new AuthPage();

@@ -23,7 +23,7 @@
 | SET-002 | Theme persists after reload | Persistence | Dark survives refresh | ✓ |
 | SET-003 | Theme + language persist together | Persistence | Dark + Persian / RTL after refresh | ✓ |
 | SET-004 | Default theme light | Functional | `data-theme=light`; btn Dark | ✓ (in 001) |
-| SET-005 | Theme usable on auth screen | Functional | Toggle before register | ○ |
+| SET-005 | Theme usable on auth screen | Functional | Toggle before register | ✓ |
 | SET-006 | Dark theme Play still readable | UI | Board/status visible in dark | ○ |
 | SET-007 | Dark theme Profile still readable | UI | Stats/form visible in dark | ○ |
 | SET-008 | Dark theme History still readable | UI | Table/empty visible in dark | ○ HIST-022 |

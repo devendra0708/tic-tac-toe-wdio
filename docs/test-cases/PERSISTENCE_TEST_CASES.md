@@ -19,8 +19,8 @@
 
 | ID | Title | Type | Expected | Automated |
 |----|-------|------|----------|------|
-| STOR-001 | Users key after register | Persistence | `ttt:users` exists | ○ |
-| STOR-002 | Session key after login/register | Persistence | `ttt:session` set | ○ |
+| STOR-001 | Users key after register | Persistence | `ttt:users` exists | ✓ |
+| STOR-002 | Session key after login/register | Persistence | `ttt:session` set | ✓ |
 | STOR-003 | Logout removes session | Persistence | Session cleared; auth shown | ✓ AUTH-006 |
 | STOR-004 | Delete removes user record | Persistence | Cannot login; user gone | ✓ PROF-003 |
 | STOR-005 | Corrupt users JSON recovery | Edge | App recovers to empty users | ○ |
