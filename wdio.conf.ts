@@ -6,6 +6,17 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = __dirname
 const staticPort = Number(process.env.WDIO_STATIC_PORT || 4567)
 const allureResultsDir = path.join(root, 'allure-results')
+const isCI = process.env.CI === 'true' || process.env.CI === '1'
+
+const chromeArgs = [
+  '--disable-gpu',
+  '--window-size=1280,900',
+  '--no-sandbox',
+  '--disable-dev-shm-usage',
+]
+if (isCI) {
+  chromeArgs.unshift('--headless=new')
+}
 
 export const config: WebdriverIO.Config = {
   runner: 'local',
@@ -19,12 +30,7 @@ export const config: WebdriverIO.Config = {
     {
       browserName: 'chrome',
       'goog:chromeOptions': {
-        args: [
-          // '--headless=new',
-          '--disable-gpu',
-          '--window-size=1280,900',
-          '--no-sandbox',
-        ],
+        args: chromeArgs,
       },
     },
   ],
@@ -37,6 +43,8 @@ export const config: WebdriverIO.Config = {
   waitforTimeout: 10000,
   connectionRetryTimeout: 120000,
   connectionRetryCount: 3,
+  specFileRetries: isCI ? 1 : 0,
+  specFileRetriesDeferred: true,
 
   services: [
     [
@@ -62,6 +70,7 @@ export const config: WebdriverIO.Config = {
           NODE_VERSION: process.version,
           BROWSER: 'chrome',
           BASE_URL: `http://127.0.0.1:${staticPort}`,
+          CI: String(isCI),
         },
       },
     ],
