@@ -1,24 +1,26 @@
-class HeaderPage {
+import BasePage from './base-page'
+
+class HeaderPage extends BasePage {
   get themeBtn() {
-    return $('[data-testid="btn-theme"]')
+    return this.tid('btn-theme')
   }
   get languageSelect() {
-    return $('[data-testid="select-language"]')
+    return this.tid('select-language')
   }
   get hello() {
-    return $('[data-testid="hello-user"]')
+    return this.tid('hello-user')
   }
   get navPlay() {
-    return $('[data-testid="nav-play"]')
+    return this.tid('nav-play')
   }
   get navProfile() {
-    return $('[data-testid="nav-profile"]')
+    return this.tid('nav-profile')
   }
   get navHistory() {
-    return $('[data-testid="nav-history"]')
+    return this.tid('nav-history')
   }
   get logoutBtn() {
-    return $('[data-testid="btn-logout"]')
+    return this.tid('btn-logout')
   }
 
   async theme(): Promise<string | null> {

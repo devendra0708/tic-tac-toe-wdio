@@ -1,25 +1,27 @@
-class AuthPage {
+import BasePage from './base-page'
+
+class AuthPage extends BasePage {
   get form() {
-    return $('[data-testid="auth-form"]')
+    return this.tid('auth-form')
   }
   get nameInput() {
-    return $('[data-testid="input-name"]')
+    return this.tid('input-name')
   }
   get error() {
-    return $('[data-testid="auth-error"]')
+    return this.tid('auth-error')
   }
   get registerBtn() {
-    return $('[data-testid="btn-register"]')
+    return this.tid('btn-register')
   }
   get loginBtn() {
-    return $('[data-testid="btn-login"]')
+    return this.tid('btn-login')
   }
   get switchModeBtn() {
-    return $('[data-testid="btn-switch-mode"]')
+    return this.tid('btn-switch-mode')
   }
 
   async waitForDisplayed() {
-    await this.form.waitForDisplayed()
+    await this.waitFor(this.form)
   }
 
   async register(name: string) {

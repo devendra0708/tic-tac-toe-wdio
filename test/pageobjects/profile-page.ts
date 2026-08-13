@@ -1,40 +1,42 @@
-class ProfilePage {
+import BasePage from './base-page'
+
+class ProfilePage extends BasePage {
   get view() {
-    return $('[data-testid="view-profile"]')
+    return this.tid('view-profile')
   }
   get title() {
-    return $('[data-testid="profile-title"]')
+    return this.tid('profile-title')
   }
   get nameInput() {
-    return $('[data-testid="input-profile-name"]')
+    return this.tid('input-profile-name')
   }
   get saveBtn() {
-    return $('[data-testid="btn-save-profile"]')
+    return this.tid('btn-save-profile')
   }
   get error() {
-    return $('[data-testid="profile-error"]')
+    return this.tid('profile-error')
   }
   get message() {
-    return $('[data-testid="profile-message"]')
+    return this.tid('profile-message')
   }
   get wins() {
-    return $('[data-testid="profile-wins"]')
+    return this.tid('profile-wins')
   }
   get losses() {
-    return $('[data-testid="profile-losses"]')
+    return this.tid('profile-losses')
   }
   get draws() {
-    return $('[data-testid="profile-draws"]')
+    return this.tid('profile-draws')
   }
   get created() {
-    return $('[data-testid="profile-created"]')
+    return this.tid('profile-created')
   }
   get deleteBtn() {
-    return $('[data-testid="btn-delete-account"]')
+    return this.tid('btn-delete-account')
   }
 
   async waitForDisplayed() {
-    await this.view.waitForDisplayed()
+    await this.waitFor(this.view)
   }
 
   async saveName(name: string) {
@@ -45,21 +47,10 @@ class ProfilePage {
   async deleteAccount(accept = true) {
     await this.deleteBtn.waitForClickable()
     await this.deleteBtn.click()
-    await browser.waitUntil(
-      async () => {
-        try {
-          await browser.getAlertText()
-          return true
-        } catch {
-          return false
-        }
-      },
-      { timeout: 5000, timeoutMsg: 'Expected delete confirm dialog' },
-    )
     if (accept) {
-      await browser.acceptAlert()
+      await this.acceptNativeConfirm('Expected delete confirm dialog')
     } else {
-      await browser.dismissAlert()
+      await this.dismissNativeConfirm('Expected delete confirm dialog')
     }
   }
 }

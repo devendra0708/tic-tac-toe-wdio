@@ -1,25 +1,27 @@
-class HistoryPage {
+import BasePage from './base-page'
+
+class HistoryPage extends BasePage {
   get view() {
-    return $('[data-testid="view-history"]')
+    return this.tid('view-history')
   }
   get title() {
-    return $('[data-testid="history-title"]')
+    return this.tid('history-title')
   }
   get empty() {
-    return $('[data-testid="history-empty"]')
+    return this.tid('history-empty')
   }
   get table() {
-    return $('[data-testid="history-table"]')
+    return this.tid('history-table')
   }
   get clearBtn() {
-    return $('[data-testid="btn-clear-history"]')
+    return this.tid('btn-clear-history')
   }
   get rows() {
-    return $$('[data-testid^="history-row-"]')
+    return this.tidPrefix('history-row-')
   }
 
   async waitForDisplayed() {
-    await this.view.waitForDisplayed()
+    await this.waitFor(this.view)
   }
 
   async rowCount(): Promise<number> {
@@ -27,19 +29,19 @@ class HistoryPage {
   }
 
   row(index: number) {
-    return $(`[data-testid="history-row-${index}"]`)
+    return this.tid(`history-row-${index}`)
   }
 
   date(index: number) {
-    return $(`[data-testid="history-date-${index}"]`)
+    return this.tid(`history-date-${index}`)
   }
 
   result(index: number) {
-    return $(`[data-testid="history-result-${index}"]`)
+    return this.tid(`history-result-${index}`)
   }
 
   difficulty(index: number) {
-    return $(`[data-testid="history-difficulty-${index}"]`)
+    return this.tid(`history-difficulty-${index}`)
   }
 
   async rowResultAttr(index: number) {
@@ -49,21 +51,10 @@ class HistoryPage {
   async clear(accept = true) {
     await this.clearBtn.waitForClickable()
     await this.clearBtn.click()
-    await browser.waitUntil(
-      async () => {
-        try {
-          await browser.getAlertText()
-          return true
-        } catch {
-          return false
-        }
-      },
-      { timeout: 5000, timeoutMsg: 'Expected clear-history confirm' },
-    )
     if (accept) {
-      await browser.acceptAlert()
+      await this.acceptNativeConfirm('Expected clear-history confirm')
     } else {
-      await browser.dismissAlert()
+      await this.dismissNativeConfirm('Expected clear-history confirm')
     }
   }
 }
