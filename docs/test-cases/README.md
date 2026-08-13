@@ -17,7 +17,7 @@ All-cases summary: [`../TEST_CASES_SUMMARY.md`](../TEST_CASES_SUMMARY.md) · Kno
 | Section | File | Spec | ID prefix |
 |---------|------|------|-----------|
 | Auth | [AUTH_TEST_CASES.md](AUTH_TEST_CASES.md) | `auth.spec.ts` | `AUTH` |
-| Navigation / shell | [NAV_TEST_CASES.md](NAV_TEST_CASES.md) | *(cross-spec)* | `NAV` |
+| Navigation / shell | [NAV_TEST_CASES.md](NAV_TEST_CASES.md) | `nav.spec.ts` | `NAV` |
 | Gameplay | [GAME_TEST_CASES.md](GAME_TEST_CASES.md) | `game.spec.ts` | `GAME` |
 | Difficulty | [DIFFICULTY_TEST_CASES.md](DIFFICULTY_TEST_CASES.md) | `game.spec.ts` / `e2e` | `DIFF` |
 | Profile | [PROFILE_TEST_CASES.md](PROFILE_TEST_CASES.md) | `profile.spec.ts` | `PROF` |

@@ -13,12 +13,15 @@ WebdriverIO + TypeScript E2E suite for a single-file Tic-Tac-Toe app.
 4. [`docs/DECISIONS.md`](docs/DECISIONS.md) — why the suite is built this way  
 5. [`test/specs/`](test/specs/) — automated specs (`[ID]` in each `it` title)
 
-CI runs on every push/PR: typecheck → lint → format check → E2E suite + Allure HTML as the **`allure-report`** artifact (also **`allure-results`**). On **`main`**, the same report is published to **GitHub Pages** (enable **Settings → Pages → Source: GitHub Actions** once).
+CI runs on every push/PR: typecheck → lint → format check → E2E suite + Allure HTML as the **`allure-report`** artifact (also **`allure-results`**). On **`main`**, the report is also published to GitHub Pages:
+
+**Live Allure:** [https://devendra0708.github.io/tic-tac-toe-wdio/](https://devendra0708.github.io/tic-tac-toe-wdio/)  
+(Requires **Settings → Pages → Source: GitHub Actions** once; updates after each `main` run that produces a report.)
 
 ## Prerequisites
 
-- Node.js 18+
-- Chrome (local runs; CI uses headless Chrome) — **or** Docker for `npm run docker:test`
+- Node.js **20** (CI); local 18+ usually works
+- Chrome (local runs; CI uses headless Chrome) — **or** Docker for `npm run docker:test` (image uses Node 22)
 - Java 8+ only if you generate Allure HTML locally (not needed for Docker or CI artifacts)
 
 ## Setup

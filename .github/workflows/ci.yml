@@ -97,7 +97,8 @@ jobs:
   publish-report:
     name: Publish Allure to GitHub Pages
     needs: e2e
-    if: ${{ !cancelled() && needs.e2e.outputs.report_ready == 'true' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') }}
+    # Run even when e2e is red — live report is most useful on failure.
+    if: ${{ always() && !cancelled() && needs.e2e.outputs.report_ready == 'true' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') }}
     runs-on: ubuntu-latest
     permissions:
       pages: write

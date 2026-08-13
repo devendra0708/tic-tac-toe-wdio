@@ -101,9 +101,9 @@ Short rationale for choices in this WebdriverIO suite. Newest items reflect curr
 
 ## DEC-11 — Live Allure on GitHub Pages
 
-**Decision:** After CI generates `allure-report/`, upload it with `actions/upload-pages-artifact` and deploy from `main`/`master` via `actions/deploy-pages` (job `publish-report`). Artifacts remain available on every PR/push.
+**Decision:** After CI generates `allure-report/`, upload it with `actions/upload-pages-artifact` and deploy from `main`/`master` via `actions/deploy-pages` (job `publish-report`). The publish job uses `always()` so a **red** suite still updates the live site when a report was produced. Artifacts remain available on every PR/push.
 
-**Why:** Reviewers get a clickable URL for the latest main-branch report without downloading zips. Requires repo **Settings → Pages → Source: GitHub Actions**.
+**Why:** Reviewers get a clickable URL for the latest main-branch report without downloading zips — especially useful when CI is red. Requires repo **Settings → Pages → Source: GitHub Actions**. Live URL: `https://devendra0708.github.io/tic-tac-toe-wdio/`.
 
 ---
 
