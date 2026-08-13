@@ -160,4 +160,35 @@ describe('History', () => {
     expect(msg).toBeTruthy();
     expect(String(msg).toLowerCase()).toMatch(/histor|game/);
   });
+
+  it('[HIST-017] Medium and Hard difficulty are recorded on history rows', async () => {
+    await registerAndPlay('HistDiff');
+
+    for (const { value, label } of [
+      { value: 'medium' as const, label: 'Medium' },
+      { value: 'hard' as const, label: 'Hard' },
+    ]) {
+      await HeaderPage.goPlay();
+      await GamePage.waitForDisplayed();
+      await GamePage.newGame();
+      await GamePage.difficulty.selectByAttribute('value', value);
+      await expect(GamePage.difficulty).toHaveValue(value);
+
+      let result: string | null = null;
+      for (let attempt = 0; attempt < 12; attempt++) {
+        await GamePage.newGame();
+        // Keep selected difficulty (do not force Easy).
+        await GamePage.difficulty.selectByAttribute('value', value);
+        result = await GamePage.playUntilOver();
+        if (result === 'human' || result === 'computer' || result === 'draw') {
+          break;
+        }
+      }
+      expect(['human', 'computer', 'draw']).toContain(result);
+
+      await HeaderPage.goHistory();
+      await HistoryPage.waitForDisplayed();
+      await expect(HistoryPage.difficulty(0)).toHaveText(label);
+    }
+  });
 });

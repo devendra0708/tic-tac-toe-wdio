@@ -32,7 +32,7 @@
 | AUTH-009 | Auth form on first visit | Functional | Register mode by default | ✓ (in 001) |
 | AUTH-010 | Whitespace-only register | Negative | Empty-name error after trim | ✓ |
 | AUTH-011 | Leading/trailing spaces trimmed | Edge | Stored/shown trimmed consistently | ✓ |
-| AUTH-012 | Case / key normalization | Edge | Document Alice vs alice lookup | ○ |
+| AUTH-012 | Case / key normalization | Edge | Document Alice vs alice lookup | ✓ |
 | AUTH-013 | Very long name | Edge | Accepted or graceful UI | ○ |
 | AUTH-014 | Special characters in name | Edge | `O'Brien`, `علی`, emoji OK if ≥2 | ○ |
 | AUTH-015 | Error clears when switching mode | Functional | Error hidden after switch | ✓ |
@@ -43,7 +43,7 @@
 
 ## Automated in `auth.spec.ts`
 
-`AUTH-001` … `AUTH-006`, `AUTH-010`, `AUTH-011`
+`AUTH-001` … `AUTH-006`, `AUTH-008`, `AUTH-010` … `AUTH-012`, `AUTH-015`, `AUTH-016`
 
 ---
 

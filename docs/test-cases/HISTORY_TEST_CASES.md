@@ -38,11 +38,11 @@
 | HIST-014 | History survives reload (same session) | Persistence | Rows still present after refresh | ✓ |
 | HIST-015 | History survives logout/login | Persistence | Same user sees prior rows | ✓ |
 | HIST-016 | Two users isolated | Persistence | Covered by `[E2E-007]` | ✓ E2E |
-| HIST-017 | Hard/Medium difficulty recorded | Functional | Difficulty cell shows Hard/Medium | ○ |
+| HIST-017 | Hard/Medium difficulty recorded | Functional | Difficulty cell shows Hard/Medium | ✓ |
 | HIST-018 | Clear confirm message copy | Functional | Confirm mentions history/games | ✓ |
 | HIST-019 | Cap at 100 history entries | Edge | 101st drops oldest | ○ manual |
 | HIST-020 | Empty state after delete+re-register | Functional | Covered by `[E2E-006]` | ✓ E2E |
-| HIST-021 | English labels after switching back from Persian | Functional | Title “Game History” again | ○ |
+| HIST-021 | English labels after switching back from Persian | Functional | Title “Game History” again | ✓ |
 | HIST-022 | Dark theme History still readable | UI | Table/empty visible in dark | ○ |
 
 
@@ -52,7 +52,7 @@
 
 ## Automated in `history.spec.ts`
 
-`HIST-001` … `HIST-007`, `HIST-014`
+`HIST-001` … `HIST-007`, `HIST-014`, `HIST-015`, `HIST-017`, `HIST-018`
 
 ## Related elsewhere
 

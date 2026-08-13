@@ -27,8 +27,8 @@
 | I18N-006 | Language persists after reload | Persistence | Persian / RTL + بازی after refresh | ✓ |
 | I18N-007 | Change language on auth before register | Functional | Persian auth → register → Persian Play + سلام | ✓ |
 | I18N-008 | Persian History labels | Functional | Title not “Game History”; empty هنوز بازی‌ای انجام نشده است.; RTL | ✓ HIST-007 |
-| I18N-009 | English History after switching back from Persian | Functional | Title “Game History” again | ○ |
-| I18N-010 | Persian Profile labels | Functional | Profile strings in Persian | ○ |
+| I18N-009 | English History after switching back from Persian | Functional | Title “Game History” again | ✓ |
+| I18N-010 | Persian Profile labels | Functional | Profile strings in Persian | ✓ |
 | I18N-011 | Theme button label in Persian | Functional | تیره / روشن as appropriate | ✓ |
 | I18N-012 | Localized full play journey | E2E | Covered by `[E2E-008]` | ✓ E2E |
 | I18N-013 | Persian Profile created date format | Functional | `profile-created` matches `۱۴۰۵/۵/۲۱`-style | ✓ |
@@ -38,7 +38,7 @@
 
 ## Automated in `i18n.spec.ts`
 
-`I18N-001` … `I18N-007`, `I18N-013`, `I18N-014`
+`I18N-001` … `I18N-007`, `I18N-009` … `I18N-011`, `I18N-013`, `I18N-014`
 
 ---
 

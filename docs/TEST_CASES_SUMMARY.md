@@ -25,10 +25,10 @@
 | Metric | Count |
 |--------|------:|
 | Total cases | **136** |
-| Catalog automated (✓) | **116** |
+| Catalog automated (✓) | **101** |
 | Dedicated `it('[ID]')` blocks | **~80+** (see Spec map) |
 | Partial (◐) | 2 |
-| Planned / manual (○) | 18 |
+| Planned / manual (○) | 11 |
 | Priority P0 | **60** |
 
 Catalog ✓ can exceed dedicated `it()` count when one test covers multiple IDs. The Spec map below lists dedicated `it('[ID]')` blocks.
@@ -67,7 +67,7 @@ Catalog: [`AUTH_TEST_CASES.md`](test-cases/AUTH_TEST_CASES.md) · Spec: `auth.sp
 | AUTH-009 | Auth form on first visit | P0 | ✓ |
 | AUTH-010 | Whitespace-only register | P1 | ✓ |
 | AUTH-011 | Leading/trailing spaces trimmed | P1 | ✓ |
-| AUTH-012 | Case / key normalization | Backlog | ○ |
+| AUTH-012 | Case / key normalization | P1 | ✓ |
 | AUTH-013 | Very long name | Backlog | ○ |
 | AUTH-014 | Special characters in name | Backlog | ○ |
 | AUTH-015 | Error clears when switching mode | P1 | ✓ |
@@ -148,7 +148,7 @@ Catalog: [`PROFILE_TEST_CASES.md`](test-cases/PROFILE_TEST_CASES.md) · Spec: `p
 | PROF-003 | Delete account accept | P0 | ✓ |
 | PROF-004 | Created date displayed | P1 | ✓ |
 | PROF-005 | Initial stats zero | P0 | ✓ |
-| PROF-006 | Rename too short (native) | Backlog | ○ |
+| PROF-006 | Rename too short (native) | P1 | ✓ |
 | PROF-007 | Rename to existing user | P1 | ✓ |
 | PROF-008 | Rename updates avatar | P1 | ✓ |
 | PROF-009 | Stats after win | P1 | ◐ |
@@ -179,11 +179,11 @@ Catalog: [`HISTORY_TEST_CASES.md`](test-cases/HISTORY_TEST_CASES.md) · Spec: `h
 | HIST-014 | History survives reload (same session) | P0 | ✓ |
 | HIST-015 | History survives logout/login | P0 | ✓ |
 | HIST-016 | Two users isolated | P0 | ✓ |
-| HIST-017 | Hard/Medium difficulty recorded | Backlog | ○ |
+| HIST-017 | Hard/Medium difficulty recorded | P1 | ✓ |
 | HIST-018 | Clear confirm message copy | P1 | ✓ |
 | HIST-019 | Cap at 100 history entries | Backlog | ○ |
 | HIST-020 | Empty state after delete+re-register | P1 | ✓ |
-| HIST-021 | English labels after switching back from Persian | Backlog | ○ |
+| HIST-021 | English labels after switching back from Persian | P1 | ✓ |
 | HIST-022 | Dark theme History still readable | Backlog | ○ |
 
 ### Settings (theme)
@@ -215,8 +215,8 @@ Catalog: [`I18N_TEST_CASES.md`](test-cases/I18N_TEST_CASES.md) · Spec: `i18n.sp
 | I18N-006 | Language persists after reload | P0 | ✓ |
 | I18N-007 | Change language on auth before register | P1 | ✓ |
 | I18N-008 | Persian History labels | P1 | ✓ |
-| I18N-009 | English History after switching back from Persian | Backlog | ○ |
-| I18N-010 | Persian Profile labels | Backlog | ○ |
+| I18N-009 | English History after switching back from Persian | P1 | ✓ |
+| I18N-010 | Persian Profile labels | P1 | ✓ |
 | I18N-011 | Theme button label in Persian | P1 | ✓ |
 | I18N-012 | Localized full play journey | P0 | ✓ |
 | I18N-013 | Persian Profile created date format | P1 | ✓ |

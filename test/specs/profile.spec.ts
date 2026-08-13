@@ -91,4 +91,32 @@ describe('Profile', () => {
     await ProfilePage.saveName(uniqueName('Bob'));
     await expect(HeaderPage.avatar).toHaveText('B');
   });
+
+  it('[PROF-006] rename too short is blocked by HTML minLength', async () => {
+    const name = uniqueName('Len');
+    await openFreshApp();
+    await AuthPage.register(name);
+    await GamePage.waitForDisplayed();
+    await HeaderPage.goProfile();
+    await ProfilePage.waitForDisplayed();
+
+    await expect(ProfilePage.nameInput).toHaveAttribute('minlength', '2');
+    await ProfilePage.nameInput.setValue('A');
+    await ProfilePage.saveBtn.click();
+
+    const validity = await browser.execute(() => {
+      const input = document.querySelector(
+        '[data-testid="input-profile-name"]',
+      ) as HTMLInputElement;
+      return {
+        valid: input.validity.valid,
+        tooShort: input.validity.tooShort,
+        value: input.value,
+      };
+    });
+    expect(validity.value).toBe('A');
+    expect(validity.tooShort || !validity.valid).toBe(true);
+    await expect(ProfilePage.view).toBeDisplayed();
+    await expect(HeaderPage.hello).toHaveText(`Hello, ${name}`);
+  });
 });
