@@ -1,47 +1,47 @@
-import BasePage from './base-page'
+import BasePage from './base-page';
 
 class AuthPage extends BasePage {
   get form() {
-    return this.tid('auth-form')
+    return this.tid('auth-form');
   }
   get nameInput() {
-    return this.tid('input-name')
+    return this.tid('input-name');
   }
   get error() {
-    return this.tid('auth-error')
+    return this.tid('auth-error');
   }
   get registerBtn() {
-    return this.tid('btn-register')
+    return this.tid('btn-register');
   }
   get loginBtn() {
-    return this.tid('btn-login')
+    return this.tid('btn-login');
   }
   get switchModeBtn() {
-    return this.tid('btn-switch-mode')
+    return this.tid('btn-switch-mode');
   }
 
   async waitForDisplayed() {
-    await this.waitFor(this.form)
+    await this.waitFor(this.form);
   }
 
   async register(name: string) {
-    await this.nameInput.setValue(name)
-    await this.registerBtn.click()
+    await this.nameInput.setValue(name);
+    await this.registerBtn.click();
   }
 
   async login(name: string) {
-    await this.nameInput.setValue(name)
-    await this.loginBtn.click()
+    await this.nameInput.setValue(name);
+    await this.loginBtn.click();
   }
 
   async switchMode() {
-    await this.switchModeBtn.click()
+    await this.switchModeBtn.click();
   }
 
   async submitEmptyRegister() {
-    await this.nameInput.clearValue()
-    await this.registerBtn.click()
+    await this.nameInput.clearValue();
+    await this.registerBtn.click();
   }
 }
 
-export default new AuthPage()
+export default new AuthPage();

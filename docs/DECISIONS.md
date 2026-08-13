@@ -80,4 +80,23 @@ Short rationale for choices in this WebdriverIO suite. Newest items reflect curr
 
 ---
 
+## DEC-9 — Docker single-image test run
+
+**Decision:** Ship `Dockerfile.tests` + `compose.yml` with one `tests` service (`npm run docker:test`). No separate app container — WDIO’s static-server hosts `app/` inside the same image. Chromium, chromedriver, and JRE live in the image; Allure HTML is written to a host-mounted `allure-report/`.
+
+**Why:**
+- Reviewers can run the suite without installing Chrome or Java on the host.
+- A second app image (as in some reference repos) adds compose wiring we do not need because the SUT is already served by WDIO.
+- `CHROME_BIN` / `CHROMEDRIVER_BIN` in `wdio.conf.ts` point at the Debian Chromium packages only when those env vars are set (local headed Chrome stays unchanged).
+
+---
+
+## DEC-10 — ESLint + Prettier in CI
+
+**Decision:** Flat ESLint (`eslint.config.mjs` + `typescript-eslint`) and Prettier (2-space, single quotes) on `test/**` and `wdio.conf.ts`. CI runs `lint` and `format:check` before `npm test`. Ignore `app/` (SUT) and generated Allure folders.
+
+**Why:** Catches unused/unsafe TypeScript and formatting drift before E2E burns CI minutes; keeps the take-home handoff consistent for reviewers.
+
+---
+
 *Add new DEC entries when a non-obvious choice is locked in.*

@@ -1,0 +1,10 @@
+node_modules
+.git
+.github
+.wdio-cache
+allure-results
+allure-report
+docs
+*.md
+.DS_Store
+*.log
