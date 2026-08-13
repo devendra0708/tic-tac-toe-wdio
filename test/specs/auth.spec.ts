@@ -79,4 +79,27 @@ describe('Auth', () => {
     await AuthPage.waitForDisplayed()
     await expect(AuthPage.form).toHaveAttribute('data-mode', 'register')
   })
+
+  it('[AUTH-010] rejects whitespace-only register name', async () => {
+    await AuthPage.waitForDisplayed()
+    await AuthPage.nameInput.setValue('   ')
+    await AuthPage.registerBtn.click()
+    await expect(AuthPage.error).toBeDisplayed()
+    await expect(AuthPage.error).toHaveText('Please enter a name.')
+    await expect(AuthPage.form).toBeDisplayed()
+  })
+
+  it('[AUTH-011] trims leading and trailing spaces on register', async () => {
+    const core = uniqueName('Trim')
+    await AuthPage.waitForDisplayed()
+    await AuthPage.register(`  ${core}  `)
+    await GamePage.waitForDisplayed()
+    await expect(HeaderPage.hello).toHaveText(`Hello, ${core}`)
+
+    await HeaderPage.logout()
+    await AuthPage.switchMode()
+    await AuthPage.login(core)
+    await GamePage.waitForDisplayed()
+    await expect(HeaderPage.hello).toHaveText(`Hello, ${core}`)
+  })
 })

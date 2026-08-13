@@ -20,25 +20,25 @@
 
 | Metric | Count |
 |--------|------:|
-| Total cases | **134** |
-| Catalog automated (✓) | **87** |
-| Dedicated `it('[ID]')` blocks | **55** |
+| Total cases | **136** |
+| Catalog automated (✓) | **96** |
+| Dedicated `it('[ID]')` blocks | **65** |
 | Partial (◐) | 3 |
-| Planned / manual (○) | 44 |
+| Planned / manual (○) | 37 |
 
 Catalog ✓ can exceed dedicated `it()` count when one test covers multiple IDs. The Spec map below lists only dedicated `it('[ID]')` blocks.
 
 | Area | Cases | ✓ | ◐ | ○ | Spec | Catalog |
 |------|------:|--:|--:|--:|------|---------|
-| Auth | 17 | 9 | 0 | 8 | `auth.spec.ts` | [AUTH](test-cases/AUTH_TEST_CASES.md) |
+| Auth | 17 | 11 | 0 | 6 | `auth.spec.ts` | [AUTH](test-cases/AUTH_TEST_CASES.md) |
 | Navigation / shell | 10 | 4 | 1 | 5 | *(cross-spec)* | [NAV](test-cases/NAV_TEST_CASES.md) |
 | Gameplay | 23 | 23 | 0 | 0 | `game.spec.ts` | [GAME](test-cases/GAME_TEST_CASES.md) |
-| Difficulty | 9 | 4 | 0 | 5 | `game.spec.ts` / `e2e` | [DIFF](test-cases/DIFFICULTY_TEST_CASES.md) |
-| Profile | 13 | 7 | 1 | 5 | `profile.spec.ts` | [PROF](test-cases/PROFILE_TEST_CASES.md) |
-| History | 22 | 13 | 1 | 8 | `history.spec.ts` | [HIST](test-cases/HISTORY_TEST_CASES.md) |
+| Difficulty | 9 | 7 | 0 | 2 | `game.spec.ts` / `e2e` | [DIFF](test-cases/DIFFICULTY_TEST_CASES.md) |
+| Profile | 13 | 8 | 1 | 4 | `profile.spec.ts` | [PROF](test-cases/PROFILE_TEST_CASES.md) |
+| History | 22 | 14 | 1 | 7 | `history.spec.ts` | [HIST](test-cases/HISTORY_TEST_CASES.md) |
 | Settings (theme) | 8 | 4 | 0 | 4 | `settings.spec.ts` | [SET](test-cases/SETTINGS_TEST_CASES.md) |
-| i18n (language) | 12 | 9 | 0 | 3 | `i18n.spec.ts` | [I18N](test-cases/I18N_TEST_CASES.md) |
-| Persistence | 12 | 6 | 0 | 6 | *(cross-spec)* | [STOR](test-cases/PERSISTENCE_TEST_CASES.md) |
+| i18n (language) | 14 | 11 | 0 | 3 | `i18n.spec.ts` | [I18N](test-cases/I18N_TEST_CASES.md) |
+| Persistence | 12 | 8 | 0 | 4 | *(cross-spec)* | [STOR](test-cases/PERSISTENCE_TEST_CASES.md) |
 | E2E journeys | 8 | 8 | 0 | 0 | `e2e.spec.ts` | [E2E](test-cases/E2E_TEST_CASES.md) |
 
 ---
@@ -60,8 +60,8 @@ Catalog: [`AUTH_TEST_CASES.md`](test-cases/AUTH_TEST_CASES.md) · Spec: `auth.sp
 | AUTH-007 | Switch register → login | ✓ |
 | AUTH-008 | Switch login → register | ○ |
 | AUTH-009 | Auth form on first visit | ✓ |
-| AUTH-010 | Whitespace-only register | ○ |
-| AUTH-011 | Leading/trailing spaces trimmed | ○ |
+| AUTH-010 | Whitespace-only register | ✓ |
+| AUTH-011 | Leading/trailing spaces trimmed | ✓ |
 | AUTH-012 | Case / key normalization | ○ |
 | AUTH-013 | Very long name | ○ |
 | AUTH-014 | Special characters in name | ○ |
@@ -123,11 +123,11 @@ Catalog: [`DIFFICULTY_TEST_CASES.md`](test-cases/DIFFICULTY_TEST_CASES.md) · Sp
 | ID | Title | Automated |
 |----|-------|:----------:|
 | DIFF-001 | Change mid-game + Accept | ✓ |
-| DIFF-002 | Default difficulty Easy | ○ |
-| DIFF-003 | Change Easy→Medium on idle board | ○ |
+| DIFF-002 | Default difficulty Easy | ✓ |
+| DIFF-003 | Change Easy→Medium on idle board | ✓ |
 | DIFF-004 | Change mid-game + Dismiss | ✓ |
 | DIFF-005 | Hard AI stronger than Easy | ○ |
-| DIFF-006 | Difficulty saved on user | ○ |
+| DIFF-006 | Difficulty saved on user | ✓ |
 | DIFF-007 | Difficulty shown in history row | ✓ |
 | DIFF-008 | Options Easy/Medium/Hard present | ○ |
 | DIFF-009 | Accept then finish records new difficulty | ✓ |
@@ -144,7 +144,7 @@ Catalog: [`PROFILE_TEST_CASES.md`](test-cases/PROFILE_TEST_CASES.md) · Spec: `p
 | PROF-004 | Created date displayed | ✓ |
 | PROF-005 | Initial stats zero | ✓ |
 | PROF-006 | Rename too short (native) | ○ |
-| PROF-007 | Rename to existing user | ○ |
+| PROF-007 | Rename to existing user | ✓ |
 | PROF-008 | Rename updates avatar | ○ |
 | PROF-009 | Stats after win | ◐ |
 | PROF-010 | Stats after loss | ○ |
@@ -164,14 +164,14 @@ Catalog: [`HISTORY_TEST_CASES.md`](test-cases/HISTORY_TEST_CASES.md) · Spec: `h
 | HIST-004 | Multiple games; newest first | ✓ |
 | HIST-005 | Clear History — accept | ✓ |
 | HIST-006 | Clear History — dismiss | ✓ |
-| HIST-007 | Persian language on History | ✓ |
+| HIST-007 | Persian language on History (empty copy) | ✓ |
 | HIST-008 | Result labels Win / Loss / Draw | ✓ |
 | HIST-009 | Difficulty column reflects game | ✓ |
 | HIST-010 | Date column non-empty | ✓ |
 | HIST-011 | Row border color by result | ◐ |
 | HIST-012 | Only one row per finished game | ✓ |
 | HIST-013 | Navigate Play → History → Play | ○ |
-| HIST-014 | History survives reload (same session) | ○ |
+| HIST-014 | History survives reload (same session) | ✓ |
 | HIST-015 | History survives logout/login | ○ |
 | HIST-016 | Two users isolated | ✓ |
 | HIST-017 | Hard/Medium difficulty recorded | ○ |
@@ -214,6 +214,8 @@ Catalog: [`I18N_TEST_CASES.md`](test-cases/I18N_TEST_CASES.md) · Spec: `i18n.sp
 | I18N-010 | Persian Profile labels | ○ |
 | I18N-011 | Theme button label in Persian | ○ |
 | I18N-012 | Localized full play journey | ✓ |
+| I18N-013 | Persian Profile created date format | ✓ |
+| I18N-014 | Difficulty options in Persian | ✓ |
 
 ### Persistence
 
@@ -230,9 +232,9 @@ Catalog: [`PERSISTENCE_TEST_CASES.md`](test-cases/PERSISTENCE_TEST_CASES.md) · 
 | STOR-007 | Lang key persisted | ✓ |
 | STOR-008 | Two users isolated | ✓ |
 | STOR-009 | Session survives reload | ✓ |
-| STOR-010 | History survives reload (same session) | ○ |
+| STOR-010 | History survives reload (same session) | ✓ |
 | STOR-011 | History survives logout/login | ○ |
-| STOR-012 | Difficulty saved on user | ○ |
+| STOR-012 | Difficulty saved on user | ✓ |
 
 ### E2E journeys
 
@@ -255,14 +257,14 @@ Catalog: [`E2E_TEST_CASES.md`](test-cases/E2E_TEST_CASES.md) · Spec: `e2e.spec.
 
 | Spec | IDs | Count |
 |------|-----|------:|
-| `auth.spec.ts` | AUTH-001 … AUTH-006 | 6 |
-| `game.spec.ts` | GAME-001 … GAME-006, GAME-008 … GAME-021, DIFF-001 | 21 |
-| `profile.spec.ts` | PROF-001 … PROF-003 | 3 |
-| `history.spec.ts` | HIST-001 … HIST-007 | 7 |
+| `auth.spec.ts` | AUTH-001 … AUTH-006, AUTH-010, AUTH-011 | 8 |
+| `game.spec.ts` | GAME-001 … GAME-006, GAME-008 … GAME-021, DIFF-001 … DIFF-004, DIFF-006 | 25 |
+| `profile.spec.ts` | PROF-001 … PROF-003, PROF-007 | 4 |
+| `history.spec.ts` | HIST-001 … HIST-007, HIST-014 | 8 |
 | `settings.spec.ts` | SET-001 … SET-003 | 3 |
-| `i18n.spec.ts` | I18N-001 … I18N-007 | 7 |
+| `i18n.spec.ts` | I18N-001 … I18N-007, I18N-013, I18N-014 | 9 |
 | `e2e.spec.ts` | E2E-001 … E2E-008 | 8 |
-| **Total** | | **55** |
+| **Total** | | **65** |
 
 Catalog ✓ without a row above (e.g. AUTH-007, GAME-007, HIST-008, STOR-*, NAV-*) are covered inside another `it()` or a cross-spec journey — not missing from the suite unless marked ○.
 

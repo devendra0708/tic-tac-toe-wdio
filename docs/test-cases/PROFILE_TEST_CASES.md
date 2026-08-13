@@ -27,7 +27,7 @@
 | PROF-004 | Created date displayed | Functional | `profile-created` visible | ✓ (in 001) |
 | PROF-005 | Initial stats zero | Functional | wins/losses/draws = 0 | ✓ (in 001) |
 | PROF-006 | Rename too short (native) | Negative | HTML minlength blocks submit | ○ |
-| PROF-007 | Rename to existing user | Negative | profile-error exists | ○ |
+| PROF-007 | Rename to existing user | Negative | profile-error exists | ✓ |
 | PROF-008 | Rename updates avatar | Functional | Initial changes with new name | ○ |
 | PROF-009 | Stats after win | Functional | wins ≥ 1 | ◐ GAME-004 / E2E |
 | PROF-010 | Stats after loss | Functional | losses ≥ 1 | ○ |
@@ -39,7 +39,7 @@
 
 ## Automated in `profile.spec.ts`
 
-`PROF-001` … `PROF-003` (core path)
+`PROF-001` … `PROF-003`, `PROF-007`
 
 ---
 

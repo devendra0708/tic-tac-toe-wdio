@@ -60,4 +60,23 @@ describe('Profile', () => {
     await AuthPage.login(name)
     await expect(AuthPage.error).toBeDisplayed()
   })
+
+  it('[PROF-007] rejects rename to an existing user name', async () => {
+    const first = uniqueName('First')
+    const second = uniqueName('Second')
+    await openFreshApp()
+    await AuthPage.register(first)
+    await GamePage.waitForDisplayed()
+    await HeaderPage.logout()
+
+    await AuthPage.register(second)
+    await GamePage.waitForDisplayed()
+    await HeaderPage.goProfile()
+    await ProfilePage.waitForDisplayed()
+
+    await ProfilePage.saveName(first)
+    await expect(ProfilePage.error).toBeDisplayed()
+    await expect(await ProfilePage.error.getText()).toMatch(/already uses this name/i)
+    await expect(HeaderPage.hello).toHaveText(new RegExp(second))
+  })
 })

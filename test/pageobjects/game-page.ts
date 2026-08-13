@@ -169,6 +169,19 @@ class GamePage {
     await this.difficulty.selectByAttribute('value', 'easy')
   }
 
+  async difficultyOptionLabels(): Promise<
+    Array<{ value: string; text: string }>
+  > {
+    return browser.execute(() =>
+      [...document.querySelectorAll('[data-testid="select-difficulty"] option')].map(
+        (el) => ({
+          value: (el as HTMLOptionElement).value,
+          text: (el.textContent || '').trim(),
+        }),
+      ),
+    )
+  }
+
   async playUntilOver(maxMoves = 9, order = [0, 2, 1, 3, 6, 4, 5, 7, 8]) {
     for (let i = 0; i < maxMoves; i++) {
       const status = await this.statusValue()

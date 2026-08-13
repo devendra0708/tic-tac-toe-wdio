@@ -147,5 +147,25 @@ describe('History', () => {
     await expect(HistoryPage.title).toBeDisplayed()
     await expect(await HistoryPage.title.getText()).not.toBe('Game History')
     await expect(HistoryPage.empty).toBeDisplayed()
+    await expect(HistoryPage.empty).toHaveText('هنوز بازی‌ای انجام نشده است.')
+  })
+
+  it('[HIST-014] History survives reload in the same session', async () => {
+    await registerFresh()
+    const result = await finishAGame()
+    expect(['human', 'computer', 'draw']).toContain(result)
+
+    await HeaderPage.goHistory()
+    await HistoryPage.waitForDisplayed()
+    await expect(await HistoryPage.rowCount()).toBe(1)
+    const label = expectedResultLabel(result)
+    await expect(HistoryPage.result(0)).toHaveText(label)
+
+    await browser.refresh()
+    await GamePage.waitForDisplayed()
+    await HeaderPage.goHistory()
+    await HistoryPage.waitForDisplayed()
+    await expect(await HistoryPage.rowCount()).toBe(1)
+    await expect(HistoryPage.result(0)).toHaveText(label)
   })
 })

@@ -12,6 +12,7 @@
 - Board (`board`): cells `cell-0`…`cell-8` with `data-state=empty|x|o`
 - Human = **X**, computer = **O**
 - Controls: **New Game** (`btn-new`), **Hint** (`btn-hint`), **Reset** (`btn-reset`)
+- **New Game vs Reset:** same board reset behavior (empty board, `your-turn`, keep difficulty; no history/stats change). Differ only by label/styling.
 - Hint: `.is-hint` on suggested empty cell
 - Win: `.is-win` on winning line
 
