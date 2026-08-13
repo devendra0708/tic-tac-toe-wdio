@@ -1,3 +1,5 @@
+import BasePage from './base-page'
+
 const WIN_LINES = [
   [0, 1, 2],
   [3, 4, 5],
@@ -16,35 +18,35 @@ const STATUS_COPY: Record<string, RegExp> = {
   draw: /^draw\./i,
 }
 
-class GamePage {
+class GamePage extends BasePage {
   get view() {
-    return $('[data-testid="view-play"]')
+    return this.tid('view-play')
   }
   get status() {
-    return $('[data-testid="status"]')
+    return this.tid('status')
   }
   get board() {
-    return $('[data-testid="board"]')
+    return this.tid('board')
   }
   get difficulty() {
-    return $('[data-testid="select-difficulty"]')
+    return this.tid('select-difficulty')
   }
   get newGameBtn() {
-    return $('[data-testid="btn-new"]')
+    return this.tid('btn-new')
   }
   get hintBtn() {
-    return $('[data-testid="btn-hint"]')
+    return this.tid('btn-hint')
   }
   get resetBtn() {
-    return $('[data-testid="btn-reset"]')
+    return this.tid('btn-reset')
   }
 
   cell(index: number) {
-    return $(`[data-testid="cell-${index}"]`)
+    return this.tid(`cell-${index}`)
   }
 
   async waitForDisplayed() {
-    await this.view.waitForDisplayed()
+    await this.waitFor(this.view)
   }
 
   async statusValue(): Promise<string | null> {
@@ -56,7 +58,7 @@ class GamePage {
   }
 
   async cellCount(): Promise<number> {
-    return $$('[data-testid^="cell-"]').length
+    return this.tidPrefix('cell-').length
   }
 
   async waitUntilYourTurn(timeout = 10000) {
@@ -173,12 +175,12 @@ class GamePage {
     Array<{ value: string; text: string }>
   > {
     return browser.execute(() =>
-      [...document.querySelectorAll('[data-testid="select-difficulty"] option')].map(
-        (el) => ({
-          value: (el as HTMLOptionElement).value,
-          text: (el.textContent || '').trim(),
-        }),
-      ),
+      [
+        ...document.querySelectorAll('[data-testid="select-difficulty"] option'),
+      ].map((el) => ({
+        value: (el as HTMLOptionElement).value,
+        text: (el.textContent || '').trim(),
+      })),
     )
   }
 

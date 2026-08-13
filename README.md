@@ -58,7 +58,7 @@ docs/
   test-cases/          # per-section catalogs
 wdio.conf.ts
 test/
-  pageobjects/         # Auth, Game, Profile, History, Header
+  pageobjects/         # BasePage + Auth, Game, Profile, History, Header
   specs/               # auth, game, profile, history, settings, i18n, e2e
   utils/storage.ts     # fresh localStorage helpers
 ```
