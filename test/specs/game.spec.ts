@@ -246,6 +246,33 @@ describe('Game', () => {
     await expect($('[data-testid="cell-9"]')).not.toBeExisting()
   })
 
+  it('[DIFF-002] defaults difficulty to Easy for a new user', async () => {
+    await registerAndPlay()
+    await expect(GamePage.difficulty).toHaveValue('easy')
+  })
+
+  it('[DIFF-003] changes difficulty on idle board without confirm', async () => {
+    await registerAndPlay()
+    await expect(GamePage.difficulty).toHaveValue('easy')
+
+    await browser.execute(() => {
+      ;(window as unknown as { __c: string | null }).__c = null
+      const orig = window.confirm
+      window.confirm = (m?: string) => {
+        ;(window as unknown as { __c: string | null }).__c = String(m ?? '')
+        return true
+      }
+      ;(window as unknown as { __orig: typeof confirm }).__orig = orig
+    })
+    await GamePage.difficulty.selectByAttribute('value', 'medium')
+    const confirmCalled = await browser.execute(
+      () => (window as unknown as { __c: string | null }).__c,
+    )
+    expect(confirmCalled).toBeNull()
+    await expect(GamePage.difficulty).toHaveValue('medium')
+    await GamePage.expectEmptyBoard()
+  })
+
   it('[DIFF-001] changing difficulty mid-game with confirm starts a fresh board', async () => {
     await registerAndPlay()
     await GamePage.setEasy()
@@ -258,18 +285,71 @@ describe('Game', () => {
       async () => {
         try {
           const text = await browser.getAlertText()
-          if (!/difficulty/i.test(text)) return false
+          if (text !== 'Change difficulty and start a new game?') return false
           await browser.acceptAlert()
           return true
         } catch {
           return false
         }
       },
-      { timeout: 5000, timeoutMsg: 'Expected difficulty confirm dialog' },
+      {
+        timeout: 5000,
+        timeoutMsg:
+          'Expected confirm: “Change difficulty and start a new game?”',
+      },
     )
 
     await GamePage.waitUntilYourTurn()
     await GamePage.expectEmptyBoard()
+    await expect(GamePage.difficulty).toHaveValue('hard')
+  })
+
+  it('[DIFF-004] dismissing difficulty confirm keeps board and difficulty', async () => {
+    await registerAndPlay()
+    await GamePage.setEasy()
+    await GamePage.newGame()
+    await GamePage.playCell(4)
+    await expect(GamePage.status).toHaveAttribute('data-status', 'your-turn')
+
+    // Stub Cancel + capture copy (native dismissAlert is flaky in Chrome)
+    await browser.execute(() => {
+      ;(
+        window as unknown as { __lastConfirm: string | null; confirm: (m?: string) => boolean }
+      ).__lastConfirm = null
+      ;(window as unknown as { confirm: (m?: string) => boolean }).confirm = (
+        msg?: string,
+      ) => {
+        ;(
+          window as unknown as { __lastConfirm: string | null }
+        ).__lastConfirm = String(msg ?? '')
+        return false
+      }
+    })
+    await GamePage.difficulty.selectByAttribute('value', 'hard')
+    const confirmText = await browser.execute(
+      () =>
+        (window as unknown as { __lastConfirm: string | null }).__lastConfirm,
+    )
+    expect(confirmText).toBe('Change difficulty and start a new game?')
+
+    await expect(GamePage.cell(4)).toHaveAttribute('data-state', 'x')
+    await expect(GamePage.status).toHaveAttribute('data-status', 'your-turn')
+    await expect(GamePage.difficulty).toHaveValue('easy')
+  })
+
+  it('[DIFF-006] difficulty is saved on the user across logout/login', async () => {
+    const name = uniqueName('DiffPersist')
+    await openFreshApp()
+    await AuthPage.register(name)
+    await GamePage.waitForDisplayed()
+
+    await GamePage.difficulty.selectByAttribute('value', 'hard')
+    await expect(GamePage.difficulty).toHaveValue('hard')
+
+    await HeaderPage.logout()
+    await AuthPage.switchMode()
+    await AuthPage.login(name)
+    await GamePage.waitForDisplayed()
     await expect(GamePage.difficulty).toHaveValue('hard')
   })
 })

@@ -28,9 +28,9 @@
 | STOR-007 | Lang key persisted | Persistence | Lang survives reload | ✓ I18N-006 |
 | STOR-008 | Two users isolated | Persistence | A’s history ≠ B’s | ✓ E2E-007 |
 | STOR-009 | Session survives reload | Persistence | Still on Play after refresh | ✓ AUTH-006 |
-| STOR-010 | History survives reload (same session) | Persistence | Rows present after refresh | ○ HIST-014 |
+| STOR-010 | History survives reload (same session) | Persistence | Rows present after refresh | ✓ HIST-014 |
 | STOR-011 | History survives logout/login | Persistence | Same user sees prior rows | ○ HIST-015 |
-| STOR-012 | Difficulty saved on user | Persistence | Hard survives logout/login | ○ DIFF-006 |
+| STOR-012 | Difficulty saved on user | Persistence | Hard survives logout/login | ✓ DIFF-006 |
 
 ---
 

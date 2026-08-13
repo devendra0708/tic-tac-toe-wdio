@@ -1,6 +1,7 @@
 import AuthPage from '../pageobjects/auth-page'
 import GamePage from '../pageobjects/game-page'
 import HeaderPage from '../pageobjects/header-page'
+import ProfilePage from '../pageobjects/profile-page'
 import { openFreshApp, uniqueName } from '../utils/storage'
 
 describe('i18n', () => {
@@ -92,5 +93,29 @@ describe('i18n', () => {
     await expect(await HeaderPage.dir()).toBe('rtl')
     await expect(HeaderPage.navPlay).toHaveText('بازی')
     await expect(HeaderPage.hello).toHaveText(new RegExp(`سلام، ${name}`))
+  })
+
+  it('[I18N-013] Profile created date uses Persian calendar format', async () => {
+    await AuthPage.register(uniqueName('I18n13'))
+    await GamePage.waitForDisplayed()
+    await HeaderPage.setLanguage('fa')
+    await HeaderPage.goProfile()
+    await ProfilePage.waitForDisplayed()
+
+    const created = (await ProfilePage.created.getText()).trim()
+    // e.g. ۱۴۰۵/۵/۲۱ (Persian digits + fa-IR calendar)
+    expect(created).toMatch(/^[۰-۹]{4}\/[۰-۹]{1,2}\/[۰-۹]{1,2}/)
+  })
+
+  it('[I18N-014] Difficulty options translate to آسان / متوسط / سخت', async () => {
+    await HeaderPage.setLanguage('fa')
+    await AuthPage.register(uniqueName('I18n14'))
+    await GamePage.waitForDisplayed()
+
+    const options = await GamePage.difficultyOptionLabels()
+    const byValue = Object.fromEntries(options.map((o) => [o.value, o.text]))
+    expect(byValue.easy).toBe('آسان')
+    expect(byValue.medium).toBe('متوسط')
+    expect(byValue.hard).toBe('سخت')
   })
 })

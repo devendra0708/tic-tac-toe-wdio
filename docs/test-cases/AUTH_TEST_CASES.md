@@ -30,8 +30,8 @@
 | AUTH-007 | Switch register → login | Functional | `data-mode=login`; login btn shown | ✓ (in 005) |
 | AUTH-008 | Switch login → register | Functional | `data-mode=register`; register btn | ○ |
 | AUTH-009 | Auth form on first visit | Functional | Register mode by default | ✓ (in 001) |
-| AUTH-010 | Whitespace-only register | Negative | Empty-name error after trim | ○ |
-| AUTH-011 | Leading/trailing spaces trimmed | Edge | Stored/shown trimmed consistently | ○ |
+| AUTH-010 | Whitespace-only register | Negative | Empty-name error after trim | ✓ |
+| AUTH-011 | Leading/trailing spaces trimmed | Edge | Stored/shown trimmed consistently | ✓ |
 | AUTH-012 | Case / key normalization | Edge | Document Alice vs alice lookup | ○ |
 | AUTH-013 | Very long name | Edge | Accepted or graceful UI | ○ |
 | AUTH-014 | Special characters in name | Edge | `O'Brien`, `علی`, emoji OK if ≥2 | ○ |
@@ -43,7 +43,7 @@
 
 ## Automated in `auth.spec.ts`
 
-`AUTH-001` … `AUTH-006` (core path)
+`AUTH-001` … `AUTH-006`, `AUTH-010`, `AUTH-011`
 
 ---
 

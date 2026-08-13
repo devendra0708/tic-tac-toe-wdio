@@ -28,14 +28,14 @@
 | HIST-004 | Multiple games; newest first | Functional | ≥2 rows; row-0 = latest result | ✓ |
 | HIST-005 | Clear History — accept | Functional | Empty again; Clear gone; profile W/L/D → 0 | ✓ |
 | HIST-006 | Clear History — dismiss | Negative | Rows unchanged | ✓ |
-| HIST-007 | Persian language on History | Functional | RTL; title not English “Game History” | ✓ |
+| HIST-007 | Persian language on History | Functional | RTL; title not “Game History”; empty = هنوز بازی‌ای انجام نشده است. | ✓ |
 | HIST-008 | Result labels Win / Loss / Draw | Functional | Text matches `data-result` | ✓ (in 003) |
 | HIST-009 | Difficulty column reflects game | Functional | Easy (or Medium/Hard if set) | ✓ (in 003) |
 | HIST-010 | Date column non-empty | Functional | Localized date/time string | ✓ (in 003) |
 | HIST-011 | Row border color by result | UI | `data-result` win/loss/draw drives CSS | ◐ attr only |
 | HIST-012 | Only one row per finished game | Edge | Single finish → exactly 1 row | ✓ (in 003) |
 | HIST-013 | Navigate Play → History → Play | Functional | Views switch; data persists | ○ |
-| HIST-014 | History survives reload (same session) | Persistence | Rows still present after refresh | ○ |
+| HIST-014 | History survives reload (same session) | Persistence | Rows still present after refresh | ✓ |
 | HIST-015 | History survives logout/login | Persistence | Same user sees prior rows | ○ |
 | HIST-016 | Two users isolated | Persistence | Covered by `[E2E-007]` | ✓ E2E |
 | HIST-017 | Hard/Medium difficulty recorded | Functional | Difficulty cell shows Hard/Medium | ○ |
@@ -52,7 +52,7 @@
 
 ## Automated in `history.spec.ts`
 
-`HIST-001` … `HIST-007` (core path)
+`HIST-001` … `HIST-007`, `HIST-014`
 
 ## Related elsewhere
 
