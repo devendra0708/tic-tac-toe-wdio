@@ -10,7 +10,7 @@ WebdriverIO + TypeScript E2E suite for a single-file Tic-Tac-Toe app.
 1. [`docs/TEST_CASES_SUMMARY.md`](docs/TEST_CASES_SUMMARY.md) — full case inventory + automation counts  
 2. [`docs/test-cases/`](docs/test-cases/README.md) — per-area catalogs (AUTH / GAME / HIST / …)  
 3. [`docs/BUGS.md`](docs/BUGS.md) — product defects found in exploration  
-4. [`docs/DECISIONS.md`](docs/DECISIONS.md) — why the suite is built this way  
+4. [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — how/why the suite is built
 5. [`test/specs/`](test/specs/) — automated specs (`[ID]` in each `it` title)
 
 CI runs on every push/PR: typecheck → lint → format check → E2E suite + Allure HTML as the **`allure-report`** artifact (also **`allure-results`**). On **`main`**, the report is also published to GitHub Pages:
@@ -83,7 +83,7 @@ npm run report:serve     # generate temp report and serve
 - [Test cases summary](docs/TEST_CASES_SUMMARY.md) — all cases + coverage counts  
 - [Section catalogs](docs/test-cases/README.md) — AUTH / GAME / HIST / …  
 - [Known bugs](docs/BUGS.md) — SUT issues from exploration  
-- [Decisions](docs/DECISIONS.md) — automation design choices  
+- [Architecture](docs/ARCHITECTURE.md) — how/why the suite is built
 
 ## Layout
 
@@ -93,7 +93,7 @@ app/
 docs/
   TEST_CASES_SUMMARY.md
   BUGS.md
-  DECISIONS.md
+  ARCHITECTURE.md
   test-cases/          # per-section catalogs
 .github/workflows/
   ci.yml               # typecheck, lint, format, E2E + Allure artifacts

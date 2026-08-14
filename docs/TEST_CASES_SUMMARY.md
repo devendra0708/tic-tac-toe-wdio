@@ -16,7 +16,7 @@
 
 > Detailed per-section catalogs: [`test-cases/`](test-cases/README.md)  
 > Known product bugs/issues: [`BUGS.md`](BUGS.md)  
-> Automation decisions: [`DECISIONS.md`](DECISIONS.md)
+> Automation architecture: [`ARCHITECTURE.md`](ARCHITECTURE.md)
 
 ---
 
